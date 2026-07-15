@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title data-id="th-modified">Cơm Bé Trâm - Quản lý</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="top-bar">
+    <div id="weather-hub">
+        <div class="weather-group">
+            <span id="w-icon-container"></span>
+            <span id="w-temp">--°C</span>
+        </div>
+        <div class="weather-divider"></div>
+        <div class="weather-group">
+            <span id="w-wind-icon-container"></span>
+            <span id="w-wind-speed">-- km/h</span>
+            <svg class="wind-arrow" id="w-arrow" viewBox="0 0 24 24"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/></svg>
+        </div>
+    </div>
+
+    <div class="top-bar-right">
+        <div id="presence-count">
+            <span class="online-dot"></span>
+            👥 Online: <span id="online-val">1</span>
+        </div>
+        <button id="dark-toggle" onclick="toggleDarkMode()" aria-label="Chuyển giao diện sáng/tối">🌙</button>
+    </div>
+</div>
+
+<div class="status-container">
+    <div id="crowd-status" class="status-badge status-empty">
+        <span id="crowd-icon">🟢</span>
+        <span id="crowd-text">Vắng khách</span>
+    </div>
+</div>
+
+<div class="header-title">CƠM BÉ TRÂM</div>
+
+<div class="flip-clock-container">
+    <div class="ticker-item" id="gold-ticker">
+        <span class="ticker-label">VÀNG</span>
+        <span class="ticker-value">--</span>
+    </div>
+
+    <div class="flip-unit">
+        <div class="flip-card" id="c-h1"><div class="card-half card-top">0</div><div class="card-half card-bottom">0</div><div class="card-flip-wing">0</div><div class="card-flip-wing-back">0</div></div>
+        <div class="flip-card" id="c-h2"><div class="card-half card-top">0</div><div class="card-half card-bottom">0</div><div class="card-flip-wing">0</div><div class="card-flip-wing-back">0</div></div>
+    </div>
+    <div class="flip-colon">:</div>
+    <div class="flip-unit">
+        <div class="flip-card" id="c-m1"><div class="card-half card-top">0</div><div class="card-half card-bottom">0</div><div class="card-flip-wing">0</div><div class="card-flip-wing-back">0</div></div>
+        <div class="flip-card" id="c-m2"><div class="card-half card-top">0</div><div class="card-half card-bottom">0</div><div class="card-flip-wing">0</div><div class="card-flip-wing-back">0</div></div>
+    </div>
+    <div class="flip-colon">:</div>
+    <div class="flip-unit">
+        <div class="flip-card" id="c-s1"><div class="card-half card-top">0</div><div class="card-half card-bottom">0</div><div class="card-flip-wing">0</div><div class="card-flip-wing-back">0</div></div>
+        <div class="flip-card" id="c-s2"><div class="card-half card-top">0</div><div class="card-half card-bottom">0</div><div class="card-flip-wing">0</div><div class="card-flip-wing-back">0</div></div>
+    </div>
+
+    <div class="ticker-item" id="oil-ticker">
+        <span class="ticker-label">DẦU</span>
+        <span class="ticker-value">--</span>
+    </div>
+</div>
+
+<div class="tables-container" id="tables-container">
+    <div class="table-card" id="tab-1" onclick="selectTable(1)"><strong>Bàn 1</strong><span class="table-price skeleton" id="sum-1">0đ</span><span class="table-time skeleton" id="time-1">⏱ 0 phút</span></div>
+    <div class="table-card" id="tab-2" onclick="selectTable(2)"><strong>Bàn 2</strong><span class="table-price skeleton" id="sum-2">0đ</span><span class="table-time skeleton" id="time-2">⏱ 0 phút</span></div>
+    <div class="table-card" id="tab-3" onclick="selectTable(3)"><strong>Bàn 3</strong><span class="table-price skeleton" id="sum-3">0đ</span><span class="table-time skeleton" id="time-3">⏱ 0 phút</span></div>
+    <div class="table-card" id="tab-4" onclick="selectTable(4)"><strong>Bàn 4</strong><span class="table-price skeleton" id="sum-4">0đ</span><span class="table-time skeleton" id="time-4">⏱ 0 phút</span></div>
+    <div class="table-card" id="tab-5" onclick="selectTable(5)"><strong>Bàn 5</strong><span class="table-price skeleton" id="sum-5">0đ</span><span class="table-time skeleton" id="time-5">⏱ 0 phút</span></div>
+    <div class="table-card" id="tab-6" onclick="selectTable(6)"><strong>Bàn 6</strong><span class="table-price skeleton" id="sum-6">0đ</span><span class="table-time skeleton" id="time-6">⏱ 0 phút</span></div>
+    <div class="table-card full-width" id="tab-7" onclick="selectTable(7)"><strong>BÀN TRONG HIÊN</strong><span class="table-price skeleton" id="sum-7">0đ</span><span class="table-time skeleton" id="time-7">⏱ 0 phút</span></div>
+    <div class="table-card half-width" id="tab-8" onclick="selectTable(8)"><strong>NGOÀI ĐƯỜNG (TRÁI)</strong><span class="table-price skeleton" id="sum-8">0đ</span><span class="table-time skeleton" id="time-8">⏱ 0 phút</span></div>
+    <div class="table-card half-width" id="tab-9" onclick="selectTable(9)"><strong>NGOÀI ĐƯỜNG (PHẢI)</strong><span class="table-price skeleton" id="sum-9">0đ</span><span class="table-time skeleton" id="time-9">⏱ 0 phút</span></div>
+</div>
+
+<div id="order-section" class="container" style="display:none;">
+    <h3 id="table-title" style="text-align: center; margin-top:0; margin-bottom: 8px; color:var(--blue);"></h3>
+    <div id="menu-area" style="position: relative;">
+        <div id="menu-list"></div>
+        <button class="btn-action" id="btn-checkout" style="background: var(--warning-orange)" onclick="setLock(true)">CHỐT ĐƠN & XEM BILL</button>
+    </div>
+    <div id="bill-area" style="display:none;">
+        <div class="printer-slot"></div>
+        <div class="bill-box">
+            <div id="bill-list"></div>
+            <div class="total-container" id="total-container">
+                <div class="total-label-wrapper">
+                    <span id="txt-lang-flag"></span>
+                    <span id="txt-total-label">TỔNG</span>
+                </div>
+                <div class="arrow-container">
+                    <div class="arrow-shaft"></div>
+                    <div class="arrow-head"></div>
+                </div>
+                <span style="white-space: nowrap; flex-shrink: 0;"><span id="bill-total">0</span>đ</span>
+            </div>
+        </div>
+        <button class="btn-action" style="background: var(--blue)" onclick="setLock(false)">GỌI THÊM MÓN</button>
+        <button class="btn-action" style="background: var(--success-green)" onclick="doPay()">XÁC NHẬN THANH TOÁN</button>
+        <div class="lang-grid">
+            <button class="lang-btn" onclick="changeBillLang('vi')"><span>🇻🇳</span><span>VN</span></button>
+            <button class="lang-btn" onclick="changeBillLang('en')"><span>🇺🇸</span><span>EN</span></button>
+            <button class="lang-btn" onclick="changeBillLang('fr')"><span>🇫🇷</span><span>FR</span></button>
+            <button class="lang-btn" onclick="changeBillLang('kr')"><span>🇰🇷</span><span>KR</span></button>
+            <button class="lang-btn" onclick="changeBillLang('jp')"><span>🇯🇵</span><span>JP</span></button>
+            <button class="lang-btn" onclick="changeBillLang('th')"><span>🇹🇭</span><span>TH</span></button>
+            <button class="lang-btn" onclick="changeBillLang('it')"><span>🇮🇹</span><span>IT</span></button>
+            <button class="lang-btn" onclick="changeBillLang('pt')"><span>🇵🇹</span><span>PT</span></button>
+            <button class="lang-btn" onclick="changeBillLang('es')"><span>🇪🇸</span><span>ES</span></button>
+            <button class="lang-btn" onclick="changeBillLang('cn')"><span>🇨🇳</span><span>CN</span></button>
+            <button class="lang-btn" onclick="changeBillLang('de')"><span>🇩🇪</span><span>DE</span></button>
+            <button class="lang-btn" onclick="changeBillLang('ru')"><span>🇷🇺</span><span>RU</span></button>
+            <button class="lang-btn" onclick="changeBillLang('be')"><span>🇧🇪</span><span>BE</span></button>
+            <button class="lang-btn" onclick="changeBillLang('hu')"><span>🇭🇺</span><span>HU</span></button>
+            <button class="lang-btn" onclick="changeBillLang('at')"><span>🇦🇹</span><span>AT</span></button>
+            <button class="lang-btn" onclick="changeBillLang('tw')"><span>🇹🇼</span><span>TW</span></button>
+            <button class="lang-btn" onclick="changeBillLang('sg')"><span>🇸🇬</span><span>SG</span></button>
+            <button class="lang-btn" onclick="changeBillLang('id')"><span>🇮🇩</span><span>ID</span></button>
+            <button class="lang-btn" onclick="changeBillLang('my')"><span>🇲🇾</span><span>MY</span></button>
+            <button class="lang-btn" onclick="changeBillLang('in')"><span>🇮🇳</span><span>IN</span></button>
+            <button class="lang-btn" onclick="changeBillLang('fi')"><span>🇫🇮</span><span>FI</span></button>
+            <button class="lang-btn" onclick="changeBillLang('nl')"><span>🇳🇱</span><span>NL</span></button>
+            <button class="lang-btn" onclick="changeBillLang('se')"><span>🇸🇪</span><span>SE</span></button>
+            <button class="lang-btn" onclick="changeBillLang('ch')"><span>🇨🇭</span><span>CH</span></button>
+        </div>
+    </div>
+</div>
+
+<div id="reset-area"><button onclick="doReset()">Xóa dữ liệu ngày mới</button></div>
+<audio id="tingSound" src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3" preload="auto"></audio>
+<button id="scroll-to-checkout" class="hidden" onclick="scrollToCheckout()" aria-label="Cuộn xuống nút chốt đơn">⌄</button>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
