@@ -212,7 +212,7 @@ body.dark-mode .status-normal { background: rgba(230,81,0,0.18); color: #ffb74d;
     gap:18px;
     margin-bottom:20px;
 }
-.table-card { background: var(--bg-card); padding: 10px 2px; text-align: center; border-radius: 12px; cursor: pointer; border: 2px solid var(--border-card); box-shadow: 0 3px 0 var(--border-card); display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 90px; position: relative; overflow: hidden; transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), background 0.4s ease, color 0.4s ease;}.row{
+.table-card { box-sizing: border-box; background: var(--bg-card); padding: 10px 2px; text-align: center; border-radius: 12px; cursor: pointer; border: 2px solid var(--border-card); box-shadow: 0 3px 0 var(--border-card); display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 90px; position: relative; overflow: hidden; transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), background 0.4s ease, color 0.4s ease;}.row{
     display:flex;
     justify-content:center;
     gap:20px;
@@ -267,9 +267,9 @@ body.dark-mode .status-normal { background: rgba(230,81,0,0.18); color: #ffb74d;
 }
 .house-box{
     flex:1;
-    /* Không đặt min-height cố định nữa: align-items:stretch trên .bottom-layout
-       sẽ tự khớp chiều cao ô NHÀ bằng đúng chiều cao cột bàn 9-10, không vượt quá. */
-    max-height:190px;
+    /* align-items:stretch trên .bottom-layout sẽ tự khớp chiều cao ô NHÀ
+       bằng đúng chiều cao cột bàn 9-10 — không cần đặt height/max-height tay,
+       tránh bị lệch mỗi khi đổi kích thước bàn 9-10. */
     border:3px solid #b3b000;
     border-radius:12px;
     display:flex;
