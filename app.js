@@ -15,7 +15,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
-const dbRef = ref(database, 'combetram_v6_data');
+const const dbRef = ref(database, 'phobup_v1_data');
 
 let currentBillLang = 'vi';
 let currentTab = null;
@@ -278,7 +278,7 @@ function animateNumber(elementId, newValue) {
 // Giải pháp: đặt presence/cursors/focus ở path riêng (combetram_v6_rt), tách biệt hoàn toàn
 // khỏi path dữ liệu đơn hàng (combetram_v6_data) — listener đơn hàng giờ chỉ fire khi
 // orders/locked/times thật sự thay đổi.
-const RT_ROOT = 'combetram_v6_rt';
+const RT_ROOT = 'phobup_v1_rt';
 const USER_COLORS = ['#e53935', '#1e88e5', '#43a047', '#fb8c00', '#8e24aa', '#00acc1', '#d81b60', '#6d4c41', '#3949ab', '#c0ca33'];
 const myColor = USER_COLORS[Math.floor(Math.random() * USER_COLORS.length)];
 const onlineRef = ref(database, '.info/connected');
