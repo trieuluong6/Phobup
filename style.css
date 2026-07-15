@@ -243,9 +243,9 @@ body.dark-mode .status-normal { background: rgba(230,81,0,0.18); color: #ffb74d;
 }
 
 .small{
-    width:90px;
-    height:70px;
-    min-height:70px;
+    width:78px;
+    height:58px;
+    min-height:58px;
 }
 
 .medium{
@@ -255,27 +255,27 @@ body.dark-mode .status-normal { background: rgba(230,81,0,0.18); color: #ffb74d;
 }
 
 .large{
-    width:170px;
-    height:90px;
-    min-height:90px;
+    width:150px;
+    height:68px;
+    min-height:68px;
 }
 
 .vertical{
     width:80px;
-    height:160px;
-    min-height:160px;
+    height:108px;
+    min-height:108px;
 }
 .house-box{
     flex:1;
     /* Không đặt min-height cố định nữa: align-items:stretch trên .bottom-layout
        sẽ tự khớp chiều cao ô NHÀ bằng đúng chiều cao cột bàn 9-10, không vượt quá. */
-    max-height:340px;
+    max-height:236px;
     border:3px solid #b3b000;
     border-radius:12px;
     display:flex;
     justify-content:center;
     align-items:center;
-    font-size:32px;
+    font-size:26px;
     font-weight:bold;
     color:#9c9300;
 }
