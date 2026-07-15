@@ -339,15 +339,71 @@ body.dark-mode .remote-cursor { border-color: #1c232b; }
 #scroll-to-checkout.hidden { display: none; }
 @keyframes bobArrow { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
 
-/* TICKER VÀNG & DẦU */
-.ticker-item { display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.72rem; font-weight: bold; background: rgba(0, 0, 0, 0.04); padding: 4px 6px; border-radius: 8px; min-width: 58px; min-height: 38px; box-sizing: border-box; border: 1px solid var(--border-soft); flex-shrink: 0; transition: background 0.4s ease, border-color 0.4s ease; }
-body.dark-mode .ticker-item { background: rgba(255, 255, 255, 0.05); }
-.ticker-label { font-size: 0.56rem; color: var(--text-muted); margin-bottom: 1px; letter-spacing: 0.3px; white-space: nowrap; }
-.ticker-value { font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; white-space: nowrap; color: var(--text-main); transition: color 0.3s ease; }
-.ticker-item.up .ticker-value { color: var(--success-green); }
-.ticker-item.down .ticker-value { color: var(--primary-red); }
+.tables-container{
+    width:100%;
+}
 
-@media (max-width: 480px) {
-    .ticker-item { font-size: 0.6rem; padding: 2px 4px; min-width: 46px; min-height: 32px; border-radius: 6px; }
-    .ticker-label { font-size: 0.48rem; }
+.row{
+    display:flex;
+    justify-content:center;
+    gap:18px;
+    margin-bottom:18px;
+}
+
+.row-top{
+    gap:220px;
+}
+
+.row-small{
+    gap:60px;
+}
+
+.row-big{
+    gap:35px;
+}
+
+.bottom-layout{
+    display:flex;
+    margin-top:20px;
+    gap:25px;
+    align-items:flex-start;
+}
+
+.left-column{
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+}
+
+.small{
+    width:90px;
+    height:65px;
+}
+
+.medium{
+    width:120px;
+    height:75px;
+}
+
+.large{
+    width:170px;
+    height:95px;
+}
+
+.vertical{
+    width:70px;
+    height:160px;
+}
+
+.house-box{
+    flex:1;
+    min-height:420px;
+    border:3px solid #b8b000;
+    border-radius:12px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:46px;
+    font-weight:bold;
+    color:#9a9300;
 }
