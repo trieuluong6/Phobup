@@ -562,13 +562,21 @@ function refresh() {
             let txt = ""; if (s > 0 && data.times && data.times[i]) { const diff = Math.floor((now - data.times[i]) / 60000); txt = diff > 0 ? "⏱ " + diff + " phút" : "⏱ Mới vào"; }
             if (timeSpan.innerText !== txt) timeSpan.innerText = txt;
         }
-        const btn = document.getElementById(`tab-${i}`);
-        if (btn) {
-            let targetClassName = i === 7 ? "table-card full-width" : (i >= 8 ? "table-card half-width" : "table-card");
-            if (i === currentTab) targetClassName += ' active';
-            if (sTabLocked) targetClassName += (i >= 7) ? ' is-locked-special' : ' is-locked'; else if (s > 0) targetClassName += ' has-guest';
-            if (btn.className !== targetClassName) btn.className = targetClassName;
-        }
+const btn = document.getElementById(`tab-${i}`);
+if (btn) {
+    let targetClassName = "table-card";
+
+    if (i === currentTab)
+        targetClassName += " active";
+
+    if (sTabLocked)
+        targetClassName += " is-locked";
+    else if (s > 0)
+        targetClassName += " has-guest";
+
+    if (btn.className !== targetClassName)
+        btn.className = targetClassName;
+}
     }
 
     const crowdEl = document.getElementById('crowd-status');
