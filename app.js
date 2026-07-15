@@ -17,6 +17,9 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const dbRef = ref(database, 'phobup_v1_data');
 
+// Kích thước từng ô bàn: 1-5 nhỏ, 6-8 ngang (large), 9-10 dọc (vertical)
+const TABLE_SIZE_CLASS = { 1: 'small', 2: 'small', 3: 'small', 4: 'small', 5: 'small', 6: 'large', 7: 'large', 8: 'large', 9: 'vertical', 10: 'vertical' };
+
 let currentBillLang = 'vi';
 let currentTab = null;
 let data = { orders: {}, locked: {}, times: {} };
@@ -564,7 +567,11 @@ function refresh() {
         }
 const btn = document.getElementById(`tab-${i}`);
 if (btn) {
-    let targetClassName = "table-card";
+    // FIX: giữ lại class kích thước (small/large/vertical) — trước đây bị ghi đè
+    // mất mỗi lần refresh() chạy (VD: mỗi lần bấm chọn bàn), khiến toàn bộ ô bàn
+    // co lại về kích thước mặc định trông như "co cụm".
+    const sizeClass = TABLE_SIZE_CLASS[i] || '';
+    let targetClassName = "table-card" + (sizeClass ? " " + sizeClass : "");
 
     if (i === currentTab)
         targetClassName += " active";
@@ -573,6 +580,9 @@ if (btn) {
         targetClassName += " is-locked";
     else if (s > 0)
         targetClassName += " has-guest";
+
+    if (btn.classList.contains('has-viewer'))
+        targetClassName += " has-viewer";
 
     if (btn.className !== targetClassName)
         btn.className = targetClassName;
