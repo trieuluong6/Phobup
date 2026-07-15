@@ -120,54 +120,7 @@ fetchRealtimeWeather();
 setInterval(fetchRealtimeWeather, 600000);
 setInterval(simulateWeatherFluctuation, 5000);
 
-// TICKER VÀNG & DẦU
-let realGoldPrice = null, realOilPrice = null;
-let displayedGoldPrice = null, displayedOilPrice = null;
 
-function renderTicker(elementId, value, prevValue, digits) {
-    const widget = document.getElementById(elementId);
-    if (!widget) return;
-    const valueSpan = widget.querySelector('.ticker-value');
-    if (!valueSpan || typeof value !== 'number' || !isFinite(value)) return;
-    const isUp = prevValue === null || value >= prevValue;
-    valueSpan.textContent = `${isUp ? '▲' : '▼'}${value.toFixed(digits)}`;
-    widget.classList.toggle('up', isUp);
-    widget.classList.toggle('down', !isUp);
-}
-
-async function fetchGoldPrice() {
-    try {
-        const res = await fetch('https://api.gold-api.com/price/XAU');
-        if (!res.ok) return;
-        const d = await res.json();
-        const price = Number(d.price);
-        if (!isFinite(price)) return;
-        realGoldPrice = price;
-        if (displayedGoldPrice === null) displayedGoldPrice = price;
-    } catch (err) { console.error('[ticker] Lỗi lấy giá vàng:', err.message); }
-}
-
-async function fetchOilPrice() {
-    const proxies = ['https://api.allorigins.win/raw?url=', 'https://corsproxy.io/?url='];
-    const targetUrl = 'https://query1.finance.yahoo.com/v8/finance/chart/CL=F';
-    for (const proxy of proxies) {
-        try {
-            const res = await fetch(proxy + encodeURIComponent(targetUrl));
-            if (!res.ok) continue;
-            const d = await res.json();
-            const price = Number(d?.chart?.result?.[0]?.meta?.regularMarketPrice);
-            if (!isFinite(price)) continue;
-            realOilPrice = price;
-            if (displayedOilPrice === null) displayedOilPrice = price;
-            return;
-        } catch (err) { /* thử proxy kế tiếp */ }
-    }
-    console.error('[ticker] Không lấy được giá dầu từ mọi nguồn dự phòng');
-}
-
-fetchGoldPrice(); fetchOilPrice();
-setInterval(fetchGoldPrice, 180000);
-setInterval(fetchOilPrice, 180000);
 
 // ─── FIX #4: Ticker noise — dừng khi tab bị ẩn ───
 let tickerIntervalId = null;
@@ -702,11 +655,11 @@ function toggleDarkMode() {
     triggerHaptic('nav');
     const isDark = !document.body.classList.contains('dark-mode');
     applyDarkMode(isDark);
-    try { localStorage.setItem('combetram_dark_mode', isDark ? 'on' : 'off'); } catch (e) {}
+    try {localStorage.setItem('phobup_dark_mode', isDark ? 'on' : 'off'); } catch (e) {}
 }
 function initDarkMode() {
     let saved = null;
-    try { saved = localStorage.getItem('combetram_dark_mode'); } catch (e) {}
+    try {saved = localStorage.getItem('phobup_dark_mode'); } catch (e) {}
     if (saved === 'on') { applyDarkMode(true); return; }
     if (saved === 'off') { applyDarkMode(false); return; }
     applyDarkMode(false);
