@@ -239,7 +239,7 @@ body.dark-mode .status-normal { background: rgba(230,81,0,0.18); color: #ffb74d;
 .left-column{
     display:flex;
     flex-direction:column;
-    gap:20px;
+    gap:14px;
 }
 
 .small{
@@ -262,20 +262,20 @@ body.dark-mode .status-normal { background: rgba(230,81,0,0.18); color: #ffb74d;
 
 .vertical{
     width:80px;
-    height:108px;
-    min-height:108px;
+    height:88px;
+    min-height:88px;
 }
 .house-box{
     flex:1;
     /* Không đặt min-height cố định nữa: align-items:stretch trên .bottom-layout
        sẽ tự khớp chiều cao ô NHÀ bằng đúng chiều cao cột bàn 9-10, không vượt quá. */
-    max-height:236px;
+    max-height:190px;
     border:3px solid #b3b000;
     border-radius:12px;
     display:flex;
     justify-content:center;
     align-items:center;
-    font-size:26px;
+    font-size:22px;
     font-weight:bold;
     color:#9c9300;
 }
