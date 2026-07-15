@@ -15,7 +15,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
-const const dbRef = ref(database, 'phobup_v1_data');
+const dbRef = ref(database, 'phobup_v1_data');
 
 let currentBillLang = 'vi';
 let currentTab = null;
@@ -327,7 +327,7 @@ function renderRemoteCursors(snapVal) {
         el.style.background = c.color || '#999';
         positionCursorOnTable(id, el, c.table, idx, c.color);
     });
-    for (let t = 1; t <= 9; t++) {
+    for (let t = 1; t <= 10; t++) {
         const card = document.getElementById('tab-' + t);
         if (!card) continue;
         if (tableViewerColor[t]) { card.classList.add('has-viewer'); card.style.setProperty('--viewer-color', tableViewerColor[t]); }
@@ -445,7 +445,6 @@ function selectTable(n) {
     const section = document.getElementById('order-section');
     if (currentTab) {
         let title = "BÀN " + n;
-        if (n === 7) title = "BÀN TRONG HIÊN"; if (n === 8) title = "NGOÀI ĐƯỜNG (TRÁI)"; if (n === 9) title = "NGOÀI ĐƯỜNG (PHẢI)";
         document.getElementById('table-title').innerText = title;
         section.style.display = 'block';
         requestAnimationFrame(() => requestAnimationFrame(() => section.classList.add('section-visible')));
@@ -546,7 +545,7 @@ function refresh() {
         }
     }
 
-    for (let i = 1; i <= 9; i++) {
+    for (let i = 1; i <= 10; i++) {
         let s = 0, o = data.orders[i] || {};
         // ─── FIX #2: dùng ITEM_MAP thay vì find() ───
         for (let id in o) {
