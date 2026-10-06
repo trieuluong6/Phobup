@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="vi" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suno Lyrics Bypass Tool - Lách Bản Quyền & Từ Nhạy Cảm</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Inter & JetBrains Mono Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            suno: {
+              bg: '#090b10',
+              card: '#121624',
+              hover: '#1a2035',
+              border: '#232a42',
+              accent: '#8b5cf6',
+              neon: '#00f2fe',
+              text: '#e2e8f0',
+              muted: '#94a3b8'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #090b10;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #232a42;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3b4259;
+    }
+    .glow-box {
+      box-shadow: 0 0 20px -5px rgba(139, 92, 246, 0.15);
+    }
+    .glow-box:focus-within {
+      box-shadow: 0 0 25px 0px rgba(139, 92, 246, 0.35);
+    }
+    /* Pulse animation for active badges */
+    @keyframes pulse-subtle {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+    .animate-pulse-subtle {
+      animation: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+  </style>
+</head>
+<body class="bg-suno-bg text-suno-text font-sans min-h-screen flex flex-col justify-between selection:bg-suno-accent selection:text-white">
+
+  <header class="border-b border-suno-border bg-suno-card/80 backdrop-blur-md sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-violet-600 via-purple-500 to-cyan-400 flex items-center justify-center shadow-lg shadow-purple-500/20">
+          <i class="fa-solid font-bold text-white text-lg fa-music"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-purple-200 to-cyan-400">
+              Suno Lyrics Bypass Tool
+            </h1>
+            <span class="text-[10px] uppercase font-semibold tracking-wider px-2 py-0.5 rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20">
+              v2.5 Pro
+            </span>
+          </div>
+          <p class="text-xs text-suno-muted hidden sm:block">Lách từ nhạy cảm AI & Giữ nguyên 100% phát âm bài hát</p>
+        </div>
+      </div>
+
+      <!-- Quick status badge -->
+      <div class="flex items-center gap-3 text-xs">
+        <div class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-suno-bg border border-suno-border">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse-subtle"></span>
+          <span class="text-suno-muted">Thuật toán: <strong class="text-cyan-400 font-mono">Zero-Width Space (\u200b)</strong></span>
+        </div>
+        <a href="https://suno.com" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-suno-border hover:bg-suno-hover text-white transition-colors flex items-center gap-1.5 font-medium">
+          <span>Suno AI</span>
+          <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-suno-muted"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-grow w-full">
+    
+    <!-- Info alert box -->
+    <div class="mb-6 p-4 rounded-xl bg-purple-950/30 border border-purple-800/40 flex items-start gap-3">
+      <i class="fa-solid fa-wand-magic-sparkles text-purple-400 text-lg mt-0.5"></i>
+      <div class="text-xs sm:text-sm text-purple-200/90 leading-relaxed">
+        <strong>Mẹo lách bản quyền tối ưu:</strong> Sử dụng công nghệ <code class="bg-purple-900/60 text-cyan-300 px-1.5 py-0.5 rounded font-mono text-xs">\u200b</code> (ký tự ẩn độ rộng bằng 0). Ký tự này qua mặt hệ thống quét từ khóa của Suno/Udio nhưng trình tạo giọng nói AI vẫn phát âm mượt mà, không bị khựng hay đọc ngọng dấu chấm!
+      </div>
+    </div>
+
+    <!-- Main 2-Column Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+      
+      <!-- ================= LEFT COLUMN: INPUT & SETTINGS ================= -->
+      <div class="space-y-6">
+        
+        <!-- Text Input Card -->
+        <div class="bg-suno-card rounded-2xl border border-suno-border p-4 sm:p-5 glow-box transition-all">
+          <div class="flex items-center justify-between mb-3">
+            <label for="inputLyrics" class="text-sm font-semibold flex items-center gap-2 text-white">
+              <i class="fa-solid fa-pen-to-square text-purple-400"></i>
+              Lời Bài Hát Gốc
+            </label>
+            <div class="flex items-center gap-2">
+              <button id="btnSample" type="button" class="text-xs px-2.5 py-1 rounded-md bg-suno-bg hover:bg-suno-hover border border-suno-border text-suno-muted hover:text-white transition-all flex items-center gap-1">
+                <i class="fa-solid fa-lightbulb text-amber-400"></i> Bài mẫu
+              </button>
+              <button id="btnPaste" type="button" class="text-xs px-2.5 py-1 rounded-md bg-suno-bg hover:bg-suno-hover border border-suno-border text-suno-muted hover:text-white transition-all flex items-center gap-1">
+                <i class="fa-regular fa-paste"></i> Dán
+              </button>
+              <button id="btnClearInput" type="button" class="text-xs px-2.5 py-1 rounded-md bg-suno-bg hover:bg-red-950/40 border border-suno-border text-suno-muted hover:text-red-400 transition-all">
+                <i class="fa-solid fa-trash-can"></i> Xóa
+              </button>
+            </div>
+          </div>
+
+          <div class="relative">
+            <textarea id="inputLyrics" rows="11" 
+              placeholder="Nhập hoặc dán lời bài hát của bạn vào đây...&#10;Ví dụ:&#10;[Verse 1]&#10;I fell in love with you last night under the stars&#10;My heart beats for you baby forever..." 
+              class="w-full bg-suno-bg border border-suno-border rounded-xl p-3.5 text-sm font-mono focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all resize-y text-suno-text leading-relaxed placeholder:text-suno-muted/50"></textarea>
+          </div>
+
+          <div class="mt-2 flex items-center justify-between text-xs text-suno-muted">
+            <span id="inputStats"><i class="fa-regular fa-file-lines mr-1"></i> 0 dòng | 0 từ | 0 ký tự</span>
+            <span class="text-emerald-400/80"><i class="fa-solid fa-shield-halved mr-1"></i> Bảo vệ thẻ structure [...]</span>
+          </div>
+        </div>
+
+        <!-- Bypass Method Configuration Card -->
+        <div class="bg-suno-card rounded-2xl border border-suno-border p-4 sm:p-5 space-y-4">
+          <h2 class="text-sm font-semibold flex items-center gap-2 text-white border-b border-suno-border/60 pb-3">
+            <i class="fa-solid fa-sliders text-cyan-400"></i>
+            Cấu Hình Phương Pháp Lách
+          </h2>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- Method Selector -->
+            <div>
+              <label class="block text-xs font-medium text-suno-muted mb-1.5">Ký tự chèn vào từ</label>
+              <select id="bypassMethod" class="w-full bg-suno-bg border border-suno-border rounded-xl px-3 py-2 text-xs sm:text-sm focus:outline-none focus:border-purple-500 text-white cursor-pointer">
+                <option value="zero-width" selected>Zero-Width Space (\u200b) [Khuyên Dùng]</option>
+                <option value="dot">Dấu chấm (.) (L.ove)</option>
+                <option value="dash">Dấu gạch ngang (-) (L-ove)</option>
+                <option value="star">Dấu sao (*) (L*ove)</option>
+                <option value="custom">Ký tự tự chọn...</option>
+              </select>
+            </div>
+
+            <!-- Custom Character Input (Hidden by default) -->
+            <div id="customCharWrapper" class="hidden">
+              <label class="block text-xs font-medium text-suno-muted mb-1.5">Nhập ký tự tùy chỉnh</label>
+              <input type="text" id="customCharInput" maxlength="3" value="~" class="w-full bg-suno-bg border border-suno-border rounded-xl px-3 py-2 text-xs sm:text-sm focus:outline-none focus:border-purple-500 text-white">
+            </div>
+
+            <!-- Insertion Position -->
+            <div>
+              <label class="block text-xs font-medium text-suno-muted mb-1.5">Vị trí chèn ký tự</label>
+              <select id="insertPosition" class="w-full bg-suno-bg border border-suno-border rounded-xl px-3 py-2 text-xs sm:text-sm focus:outline-none focus:border-purple-500 text-white cursor-pointer">
+                <option value="after-first" selected>Sau chữ cái đầu tiên (e.g. L​ove)</option>
+                <option value="every-char">Giữa mọi chữ cái (e.g. L​o​v​e)</option>
+                <option value="middle">Ở giữa từ (e.g. Lo​ve)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sensitive Words Tag Manager Card -->
+        <div class="bg-suno-card rounded-2xl border border-suno-border p-4 sm:p-5 space-y-3">
+          <div class="flex items-center justify-between">
+            <h2 class="text-sm font-semibold flex items-center gap-2 text-white">
+              <i class="fa-solid fa-tags text-rose-400"></i>
+              Danh Sách Từ Khóa Nhạy Cảm (<span id="tagCount">0</span>)
+            </h2>
+            <div class="flex items-center gap-2">
+              <button id="btnResetTags" type="button" class="text-[11px] text-suno-muted hover:text-cyan-400 transition-colors">
+                <i class="fa-solid fa-rotate-left"></i> Khôi phục mặc định
+              </button>
+              <button id="btnClearAllTags" type="button" class="text-[11px] text-suno-muted hover:text-rose-400 transition-colors">
+                <i class="fa-solid fa-xmark"></i> Xóa tất cả
+              </button>
+            </div>
+          </div>
+
+          <!-- Add new word input -->
+          <form id="addWordForm" class="flex items-center gap-2">
+            <input type="text" id="newWordInput" placeholder="Thêm từ nhạy cảm mới..." class="flex-grow bg-suno-bg border border-suno-border rounded-xl px-3.5 py-1.5 text-xs focus:outline-none focus:border-purple-500 text-white">
+            <button type="submit" class="px-3.5 py-1.5 bg-purple-600 hover:bg-purple-500 text-white rounded-xl text-xs font-medium transition-all shadow-md shadow-purple-600/20 whitespace-nowrap">
+              <i class="fa-solid fa-plus mr-1"></i> Thêm từ
+            </button>
+          </form>
+
+          <!-- Word Tags Container -->
+          <div id="wordTagsContainer" class="flex flex-wrap gap-1.5 max-h-40 overflow-y-auto p-2 bg-suno-bg rounded-xl border border-suno-border/80">
+            <!-- Dynamic tags will be rendered here -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ================= RIGHT COLUMN: OUTPUT & STATS ================= -->
+      <div class="space-y-6">
+        
+        <!-- Output Card -->
+        <div class="bg-suno-card rounded-2xl border border-suno-border p-4 sm:p-5 glow-box transition-all">
+          <div class="flex items-center justify-between mb-3">
+            <label for="outputLyrics" class="text-sm font-semibold flex items-center gap-2 text-white">
+              <i class="fa-solid fa-square-check text-emerald-400"></i>
+              Kết Quả Lời Bài Hát Đã Xử Lý
+            </label>
+            <div class="flex items-center gap-2">
+              <button id="btnCopy" type="button" class="px-3 py-1.5 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-medium text-xs transition-all flex items-center gap-1.5 shadow-lg shadow-purple-600/25 active:scale-95">
+                <i class="fa-regular fa-copy"></i>
+                <span>Sao Chép</span>
+              </button>
+              <button id="btnDownload" type="button" class="text-xs px-2.5 py-1.5 rounded-lg bg-suno-bg hover:bg-suno-hover border border-suno-border text-suno-muted hover:text-white transition-all">
+                <i class="fa-solid fa-download"></i> Tải .txt
+              </button>
+            </div>
+          </div>
+
+          <div class="relative">
+            <textarea id="outputLyrics" readonly rows="11" 
+              placeholder="Kết quả sau khi lách bản quyền sẽ xuất hiện ở đây..." 
+              class="w-full bg-suno-bg border border-suno-border rounded-xl p-3.5 text-sm font-mono focus:outline-none focus:border-emerald-500/50 transition-all resize-y text-emerald-300/90 leading-relaxed placeholder:text-suno-muted/40 cursor-text"></textarea>
+          </div>
+
+          <div class="mt-2 flex items-center justify-between text-xs text-suno-muted">
+            <span id="outputStats"><i class="fa-regular fa-file-code mr-1"></i> Sẵn sàng copy vào Suno Custom Lyrics</span>
+            <span class="text-purple-400 font-mono" id="unicodeIndicator"><i class="fa-solid fa-eye-slash mr-1"></i> Đã kích hoạt Zero-Width</span>
+          </div>
+        </div>
+
+        <!-- Statistics Dashboard Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <!-- Stat 1 -->
+          <div class="bg-suno-card border border-suno-border rounded-xl p-3.5 text-center">
+            <div class="text-xs text-suno-muted mb-1">Từ đã thay thế</div>
+            <div id="statReplacedCount" class="text-xl sm:text-2xl font-bold font-mono text-purple-400">0</div>
+          </div>
+
+          <!-- Stat 2 -->
+          <div class="bg-suno-card border border-suno-border rounded-xl p-3.5 text-center">
+            <div class="text-xs text-suno-muted mb-1">Số dòng xử lý</div>
+            <div id="statLineCount" class="text-xl sm:text-2xl font-bold font-mono text-cyan-400">0</div>
+          </div>
+
+          <!-- Stat 3 -->
+          <div class="bg-suno-card border border-suno-border rounded-xl p-3.5 text-center">
+            <div class="text-xs text-suno-muted mb-1">Thẻ Suno [...]</div>
+            <div id="statTagPreserved" class="text-xl sm:text-2xl font-bold font-mono text-emerald-400">0</div>
+          </div>
+
+          <!-- Stat 4 -->
+          <div class="bg-suno-card border border-suno-border rounded-xl p-3.5 text-center">
+            <div class="text-xs text-suno-muted mb-1">Độ an toàn</div>
+            <div id="statSafetyScore" class="text-xl sm:text-2xl font-bold font-mono text-amber-400">100%</div>
+          </div>
+        </div>
+
+        <!-- Guide & Suno Structure Tags Quick Copy -->
+        <div class="bg-suno-card rounded-2xl border border-suno-border p-4 sm:p-5 space-y-3">
+          <h3 class="text-xs font-semibold text-suno-muted uppercase tracking-wider flex items-center gap-1.5">
+            <i class="fa-solid fa-cube text-purple-400"></i> Dán nhanh các thẻ cấu trúc bài hát Suno
+          </h3>
+          <div class="flex flex-wrap gap-1.5" id="sunoTagsQuickInsert">
+            <button type="button" class="suno-tag-btn text-xs px-2.5 py-1 rounded-md bg-suno-bg hover:bg-purple-950/50 hover:text-purple-300 border border-suno-border text-suno-muted transition-all font-mono">[Verse]</button>
+            <button type="button" class="suno-tag-btn text-xs px-2.5 py-1 rounded-md bg-suno-bg hover:bg-purple-950/50 hover:text-purple-300 border border-suno-border text-suno-muted transition-all font-mono">[Chorus]</button>
+            <button type="button" class="suno-tag-btn text-xs px-2.5 py-1 rounded-md bg-suno-bg hover:bg-purple-950/50 hover:text-purple-300 border border-suno-border text-suno-muted transition-all font-mono">[Pre-Chorus]</button>
+            <button type="button" class="suno-tag-btn text-xs px-2.5 py-1 rounded-md bg-suno-bg hover:bg-purple-950/50 hover:text-purple-300 border border-suno-border text-suno-muted transition-all font-mono">[Bridge]</button>
+            <button type="button" class="suno-tag-btn text-xs px-2.5 py-1 rounded-md bg-suno-bg hover:bg-purple-950/50 hover:text-purple-300 border border-suno-border text-suno-muted transition-all font-mono">[Intro]</button>
+            <button type="button" class="suno-tag-btn text-xs px-2.5 py-1 rounded-md bg-suno-bg hover:bg-purple-950/50 hover:text-purple-300 border border-suno-border text-suno-muted transition-all font-mono">[Outro]</button>
+            <button type="button" class="suno-tag-btn text-xs px-2.5 py-1 rounded-md bg-suno-bg hover:bg-purple-950/50 hover:text-purple-300 border border-suno-border text-suno-muted transition-all font-mono">[Guitar Solo]</button>
+            <button type="button" class="suno-tag-btn text-xs px-2.5 py-1 rounded-md bg-suno-bg hover:bg-purple-950/50 hover:text-purple-300 border border-suno-border text-suno-muted transition-all font-mono">[Drop]</button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Toast Notification Container -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 ease-out pointer-events-none">
+    <div class="bg-emerald-950 border border-emerald-500/50 text-emerald-200 px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 backdrop-blur-md">
+      <div class="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400">
+        <i class="fa-solid fa-check text-base"></i>
+      </div>
+      <div>
+        <h4 id="toastTitle" class="text-xs font-bold text-white">Thành công!</h4>
+        <p id="toastMessage" class="text-xs text-emerald-300/90">Đã sao chép lời bài hát vào bộ nhớ tạm.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="border-t border-suno-border mt-10 py-4 bg-suno-card/40 text-center text-xs text-suno-muted">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+      <p>Suno Lyrics Bypass Tool &copy; 2026 - Tối ưu hóa cho Suno AI & Udio Music</p>
+      <p class="flex items-center gap-1">
+        <span>Thiết kế cho GitHub Pages</span>
+        <i class="fa-brands fa-github text-sm text-white ml-1"></i>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Default sensitive words list (English & Vietnamese)
+    const DEFAULT_WORDS = [
+      "love", "heart", "baby", "night", "forever", "darkness", "tears", 
+      "dream", "die", "kill", "blood", "kiss", "touch", "war", "cry", 
+      "pain", "yêu", "thương", "nhớ", "máu", "chết", "đêm", "mơ", "lệ"
+    ];
+
+    let sensitiveWords = [...DEFAULT_WORDS];
+
+    // Sample Lyric Data for quick testing
+    const SAMPLE_LYRIC = `[Intro - Soft Acoustic]
+
+[Verse 1]
+I fell in love with you last night under the dark sky
+My heart beats fast whenever you hold my hand baby
+We promised to stay together forever without tears
+
+[Chorus]
+Oh baby love me through the night
+Don't let the darkness take away our dream
+Even if I die or fall into the pain
+My love for you will never fade
+
+[Outro - Fade Out]
+Forever in my heart...`;
+
+    // DOM Elements
+    const inputLyrics = document.getElementById('inputLyrics');
+    const outputLyrics = document.getElementById('outputLyrics');
+    const bypassMethod = document.getElementById('bypassMethod');
+    const customCharWrapper = document.getElementById('customCharWrapper');
+    const customCharInput = document.getElementById('customCharInput');
+    const insertPosition = document.getElementById('insertPosition');
+    const wordTagsContainer = document.getElementById('wordTagsContainer');
+    const addWordForm = document.getElementById('addWordForm');
+    const newWordInput = document.getElementById('newWordInput');
+    const tagCount = document.getElementById('tagCount');
+    const btnResetTags = document.getElementById('btnResetTags');
+    const btnClearAllTags = document.getElementById('btnClearAllTags');
+    
+    // Action Buttons
+    const btnCopy = document.getElementById('btnCopy');
+    const btnPaste = document.getElementById('btnPaste');
+    const btnClearInput = document.getElementById('btnClearInput');
+    const btnSample = document.getElementById('btnSample');
+    const btnDownload = document.getElementById('btnDownload');
+    
+    // Counters & Stats
+    const inputStats = document.getElementById('inputStats');
+    const statReplacedCount = document.getElementById('statReplacedCount');
+    const statLineCount = document.getElementById('statLineCount');
+    const statTagPreserved = document.getElementById('statTagPreserved');
+    const statSafetyScore = document.getElementById('statSafetyScore');
+    const unicodeIndicator = document.getElementById('unicodeIndicator');
+
+    /**
+     * Obfuscate a single match based on configuration settings while preserving case
+     */
+    function obfuscateWord(word, charToInsert, position) {
+      if (!word || word.length === 0) return word;
+      if (word.length === 1) return word + charToInsert;
+
+      if (position === 'after-first') {
+        return word[0] + charToInsert + word.slice(1);
+      } else if (position === 'every-char') {
+        return word.split('').join(charToInsert);
+      } else if (position === 'middle') {
+        const mid = Math.floor(word.length / 2);
+        return word.slice(0, mid) + charToInsert + word.slice(mid);
+      }
+      return word[0] + charToInsert + word.slice(1);
+    }
+
+    /**
+     * Get the chosen replacement character
+     */
+    function getInsertChar() {
+      const method = bypassMethod.value;
+      if (method === 'zero-width') return '\u200b';
+      if (method === 'dot') return '.';
+      if (method === 'dash') return '-';
+      if (method === 'star') return '*';
+      if (method === 'custom') return customCharInput.value || '~';
+      return '\u200b';
+    }
+
+    /**
+     * Core Lyrics Processor Function
+     */
+    function processLyrics() {
+      const text = inputLyrics.value;
+      const charToInsert = getInsertChar();
+      const pos = insertPosition.value;
+
+      // Update UI indicator for zero-width vs visible chars
+      if (bypassMethod.value === 'zero-width') {
+        unicodeIndicator.innerHTML = `<i class="fa-solid fa-eye-slash mr-1"></i> Zero-Width Active`;
+      } else {
+        unicodeIndicator.innerHTML = `<i class="fa-solid fa-font mr-1"></i> Visible Char: "${charToInsert}"`;
+      }
+
+      if (!text.trim() || sensitiveWords.length === 0) {
+        outputLyrics.value = text;
+        updateStats(text, 0, 0);
+        return;
+      }
+
+      const lines = text.split('\n');
+      let replacedWordsTotal = 0;
+      let tagsPreservedTotal = 0;
+
+      // Escape special characters in sensitive words for Regex
+      const escapedWords = sensitiveWords
+        .filter(w => w.trim().length > 0)
+        .map(w => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+
+      if (escapedWords.length === 0) {
+        outputLyrics.value = text;
+        updateStats(text, 0, 0);
+        return;
+      }
+
+      // Regex with word boundaries (\b) to avoid replacing substrings (e.g., 'glove' from 'love')
+      // Note: Unicode pattern fallback for non-Latin characters like Vietnamese
+      const patternStr = `\\b(${escapedWords.join('|')})\\b`;
+      const regex = new RegExp(patternStr, 'gi');
+
+      const processedLines = lines.map(line => {
+        const trimmed = line.trim();
+
+        // Preserve Suno AI Structure Tags intact: [Verse], [Chorus 1], etc.
+        if (trimmed.startsWith('[') && trimmed.endsWith(']')) {
+          tagsPreservedTotal++;
+          return line;
+        }
+
+        // Replace sensitive words in current line
+        const newLine = line.replace(regex, (match) => {
+          replacedWordsTotal++;
+          return obfuscateWord(match, charToInsert, pos);
+        });
+
+        return newLine;
+      });
+
+      const resultText = processedLines.join('\n');
+      outputLyrics.value = resultText;
+
+      updateStats(text, replacedWordsTotal, tagsPreservedTotal);
+    }
+
+    function updateStats(originalText, replacedCount, tagsCount) {
+      const lines = originalText ? originalText.split('\n').length : 0;
+      const words = originalText ? originalText.trim().split(/\s+/).filter(Boolean).length : 0;
+      const chars = originalText.length;
+
+      // Update Input Textarea Subtitle
+      inputStats.innerHTML = `<i class="fa-regular fa-file-lines mr-1"></i> ${lines} dòng | ${words} từ | ${chars} ký tự`;
+
+      // Update Dashboard Counters
+      statReplacedCount.textContent = replacedCount;
+      statLineCount.textContent = lines;
+      statTagPreserved.textContent = tagsCount;
+
+      // Calculate Safety Score
+      if (words === 0) {
+        statSafetyScore.textContent = "100%";
+      } else {
+        const score = Math.min(100, Math.round((replacedCount / Math.max(1, words)) * 100 + 80));
+        statSafetyScore.textContent = `${score}%`;
+      }
+    }
+
+    function renderWordTags() {
+      wordTagsContainer.innerHTML = '';
+      tagCount.textContent = sensitiveWords.length;
+
+      sensitiveWords.forEach((word, index) => {
+        const tag = document.createElement('span');
+        tag.className = 'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-suno-card border border-suno-border text-xs text-suno-text group hover:border-purple-500/50 transition-all';
+        tag.innerHTML = `
+          <span>${escapeHtml(word)}</span>
+          <button type="button" data-index="${index}" class="text-suno-muted hover:text-rose-400 transition-colors remove-tag-btn">
+            <i class="fa-solid fa-xmark text-[11px]"></i>
+          </button>
+        `;
+        wordTagsContainer.appendChild(tag);
+      });
+
+      // Attach delete event listeners to tag buttons
+      document.querySelectorAll('.remove-tag-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const idx = parseInt(e.currentTarget.getAttribute('data-index'), 10);
+          sensitiveWords.splice(idx, 1);
+          renderWordTags();
+          processLyrics();
+        });
+      });
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    }
+
+    function showToast(title, message) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toastTitle').textContent = title;
+      document.getElementById('toastMessage').textContent = message;
+
+      toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+      
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+      }, 3000);
+    }
+
+    /**
+     * Reliable Copy to Clipboard function with iframe/execCommand fallback
+     */
+    function copyToClipboard(text) {
+      if (!text) {
+        showToast("Lỗi", "Không có nội dung để sao chép!");
+        return;
+      }
+
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast("Thành công!", "Đã sao chép lời bài hát đã lách vào bộ nhớ tạm.");
+        }).catch(() => {
+          fallbackCopy(text);
+        });
+      } else {
+        fallbackCopy(text);
+      }
+    }
+
+    function fallbackCopy(text) {
+      try {
+        outputLyrics.select();
+        document.execCommand('copy');
+        showToast("Thành công!", "Đã sao chép lời bài hát vào bộ nhớ tạm.");
+      } catch (err) {
+        showToast("Lỗi sao chép", "Vui lòng chọn thủ công và bấm Ctrl+C.");
+      }
+    }
+
+    // Input Realtime Event Listeners
+    inputLyrics.addEventListener('input', processLyrics);
+    bypassMethod.addEventListener('change', () => {
+      if (bypassMethod.value === 'custom') {
+        customCharWrapper.classList.remove('hidden');
+      } else {
+        customCharWrapper.classList.add('hidden');
+      }
+      processLyrics();
+    });
+    customCharInput.addEventListener('input', processLyrics);
+    insertPosition.addEventListener('change', processLyrics);
+
+    // Form Add Tag
+    addWordForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const val = newWordInput.value.trim().toLowerCase();
+      if (val && !sensitiveWords.includes(val)) {
+        sensitiveWords.push(val);
+        newWordInput.value = '';
+        renderWordTags();
+        processLyrics();
+      }
+    });
+
+    // Tag Management Buttons
+    btnResetTags.addEventListener('click', () => {
+      sensitiveWords = [...DEFAULT_WORDS];
+      renderWordTags();
+      processLyrics();
+      showToast("Khôi phục", "Đã đặt lại danh sách từ khóa mặc định.");
+    });
+
+    btnClearAllTags.addEventListener('click', () => {
+      sensitiveWords = [];
+      renderWordTags();
+      processLyrics();
+      showToast("Đã xóa", "Đã xóa toàn bộ từ khóa nhạy cảm.");
+    });
+
+    // Quick Insert Suno Tags into Textarea
+    document.querySelectorAll('.suno-tag-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tagText = btn.textContent;
+        const cursorPos = inputLyrics.selectionStart;
+        const originalValue = inputLyrics.value;
+        
+        inputLyrics.value = originalValue.slice(0, cursorPos) + tagText + '\n' + originalValue.slice(cursorPos);
+        inputLyrics.focus();
+        inputLyrics.selectionStart = inputLyrics.selectionEnd = cursorPos + tagText.length + 1;
+        processLyrics();
+      });
+    });
+
+    // Action Button Handlers
+    btnCopy.addEventListener('click', () => {
+      copyToClipboard(outputLyrics.value);
+    });
+
+    btnPaste.addEventListener('click', async () => {
+      try {
+        if (navigator.clipboard) {
+          const text = await navigator.clipboard.readText();
+          inputLyrics.value = text;
+          processLyrics();
+          showToast("Đã dán", "Nội dung lời bài hát đã được nhập.");
+        }
+      } catch (err) {
+        showToast("Không thể dán", "Vui lòng dùng phím tắt Ctrl+V vào ô.");
+      }
+    });
+
+    btnClearInput.addEventListener('click', () => {
+      inputLyrics.value = '';
+      processLyrics();
+    });
+
+    btnSample.addEventListener('click', () => {
+      inputLyrics.value = SAMPLE_LYRIC;
+      processLyrics();
+      showToast("Bài hát mẫu", "Đã nạp lời bài hát mẫu thành công.");
+    });
+
+    btnDownload.addEventListener('click', () => {
+      const text = outputLyrics.value;
+      if (!text) {
+        showToast("Lỗi", "Không có nội dung để tải về.");
+        return;
+      }
+      const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'suno_bypassed_lyrics.txt';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast("Tải về", "Đã lưu file suno_bypassed_lyrics.txt");
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      renderWordTags();
+      inputLyrics.value = SAMPLE_LYRIC;
+      processLyrics();
+    });
+  </script>
+</body>
+</html>
