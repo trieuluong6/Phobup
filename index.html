@@ -1,162 +1,555 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi" class="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suno Lyrics Copyright Bypass Tool</title>
-    <style>
-        :root {
-            --bg-color: #121212;
-            --card-bg: #1e1e1e;
-            --accent-color: #bb86fc;
-            --button-bg: #6200ee;
-            --button-hover: #3700b3;
-            --text-color: #e0e0e0;
-            --border-color: #333;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suno Lyrics Anti-Copyright Studio Pro v3.5</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            studio: {
+              800: '#1e1e2e',
+              900: '#11111b',
+              700: '#313244',
+              accent: '#89b4fa',
+              purple: '#cba6f7',
+              success: '#a6e3a1',
+              warning: '#f9e2af',
+              danger: '#f38ba8'
+            }
+          }
         }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            padding: 20px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        h2 { color: #fff; text-align: center; margin-bottom: 20px; }
-        .container { display: flex; flex-direction: column; gap: 15px; }
-        .group { display: flex; flex-direction: column; gap: 6px; }
-        label.title { font-weight: bold; font-size: 14px; color: #aaa; }
-        textarea {
-            width: 100%;
-            height: 180px;
-            background: var(--card-bg);
-            color: #fff;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 12px;
-            box-sizing: border-box;
-            font-family: monospace;
-            font-size: 14px;
-            resize: vertical;
-        }
-        textarea:focus { outline: 1px solid var(--accent-color); }
-        .options {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            background: var(--card-bg);
-            padding: 12px 16px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-        }
-        .options label { display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 14px; }
-        button {
-            background-color: var(--button-bg);
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 8px;
-            font-size: 15px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        button:hover { background-color: var(--button-hover); }
-        .btn-copy { background-color: #03dac6; color: #000; }
-        .btn-copy:hover { background-color: #018786; }
-    </style>
+      }
+    }
+  </script>
+  <style>
+    textarea::-webkit-scrollbar, div::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    textarea::-webkit-scrollbar-thumb, div::-webkit-scrollbar-thumb {
+      background: #45475a;
+      border-radius: 3px;
+    }
+    textarea::-webkit-scrollbar-track, div::-webkit-scrollbar-track {
+      background: #181825;
+    }
+  </style>
 </head>
-<body>
+<body class="bg-studio-900 text-slate-200 font-sans min-h-screen flex flex-col">
 
-    <h2>Suno Copyright Bypass Tool</h2>
+  <!-- Header -->
+  <header class="border-b border-studio-700 bg-studio-800/80 backdrop-blur sticky top-0 z-30 px-6 py-3">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 to-indigo-500 flex items-center justify-center text-white shadow-lg shadow-purple-500/20">
+          <i class="fa-solid font-bold text-xl fa-wand-magic-sparkles"></i>
+        </div>
+        <div>
+          <h1 class="text-lg font-bold tracking-wide text-white flex items-center gap-2">
+            Suno Lyrics Anti-Copyright Studio <span class="text-xs bg-purple-500/20 text-purple-300 border border-purple-500/30 px-2 py-0.5 rounded-full font-mono">v3.5 PRO</span>
+          </h1>
+          <p class="text-xs text-slate-400">Công cụ tối ưu lời bài hát, lách bản quyền N-Gram & Phân tích nhịp điệu cho AI Music</p>
+        </div>
+      </div>
 
-    <div class="container">
-        <div class="group">
-            <label class="title">Lời bài hát gốc (Bị dính bản quyền):</label>
-            <textarea id="inputText" placeholder="Dán lời bài hát bị Suno chặn vào đây..."></textarea>
+      <div class="flex items-center gap-2">
+        <button onclick="openModal('dictModal')" class="px-3 py-1.5 bg-studio-700 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-medium transition flex items-center gap-2 border border-slate-600/50">
+          <i class="fa-solid fa-book-bookmark text-purple-400"></i> Từ điển Quy tắc
+        </button>
+        <button onclick="loadSample('vn')" class="px-3 py-1.5 bg-studio-700 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-medium transition flex items-center gap-1.5 border border-slate-600/50">
+          <i class="fa-solid fa-file-lines text-blue-400"></i> Mẫu VN
+        </button>
+        <button onclick="loadSample('en')" class="px-3 py-1.5 bg-studio-700 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-medium transition flex items-center gap-1.5 border border-slate-600/50">
+          <i class="fa-solid fa-file-lines text-emerald-400"></i> Mẫu EN
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Suno Quick Tags Bar -->
+  <section class="bg-studio-800 border-b border-studio-700 px-6 py-2">
+    <div class="max-w-7xl mx-auto flex items-center gap-2 overflow-x-auto text-xs py-1">
+      <span class="text-slate-400 font-semibold text-xs whitespace-nowrap mr-1"><i class="fa-solid fa-tag text-purple-400"></i> Chèn thẻ Suno:</span>
+      <button onclick="insertTag('[Intro]')" class="px-2.5 py-1 bg-studio-700 hover:bg-purple-600 hover:text-white rounded text-slate-300 font-mono transition border border-slate-600/40 shrink-0">[Intro]</button>
+      <button onclick="insertTag('[Verse]')" class="px-2.5 py-1 bg-studio-700 hover:bg-purple-600 hover:text-white rounded text-slate-300 font-mono transition border border-slate-600/40 shrink-0">[Verse]</button>
+      <button onclick="insertTag('[Pre-Chorus]')" class="px-2.5 py-1 bg-studio-700 hover:bg-purple-600 hover:text-white rounded text-slate-300 font-mono transition border border-slate-600/40 shrink-0">[Pre-Chorus]</button>
+      <button onclick="insertTag('[Chorus]')" class="px-2.5 py-1 bg-studio-700 hover:bg-purple-600 hover:text-white rounded text-slate-300 font-mono transition border border-slate-600/40 shrink-0">[Chorus]</button>
+      <button onclick="insertTag('[Bridge]')" class="px-2.5 py-1 bg-studio-700 hover:bg-purple-600 hover:text-white rounded text-slate-300 font-mono transition border border-slate-600/40 shrink-0">[Bridge]</button>
+      <button onclick="insertTag('[Drop]')" class="px-2.5 py-1 bg-studio-700 hover:bg-purple-600 hover:text-white rounded text-slate-300 font-mono transition border border-slate-600/40 shrink-0">[Drop]</button>
+      <button onclick="insertTag('[Outro]')" class="px-2.5 py-1 bg-studio-700 hover:bg-purple-600 hover:text-white rounded text-slate-300 font-mono transition border border-slate-600/40 shrink-0">[Outro]</button>
+      <button onclick="insertTag('[Guitar Solo]')" class="px-2.5 py-1 bg-studio-700 hover:bg-purple-600 hover:text-white rounded text-slate-300 font-mono transition border border-slate-600/40 shrink-0">[Guitar Solo]</button>
+    </div>
+  </section>
+
+  <!-- Main Workstation -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+    <!-- Left Panel: Input & Flow Analysis -->
+    <div class="lg:col-span-6 flex flex-col gap-4">
+      <div class="bg-studio-800 rounded-xl border border-studio-700 flex flex-col flex-1 overflow-hidden shadow-xl">
+        <div class="px-4 py-3 bg-studio-800/90 border-b border-studio-700 flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-pen-to-square text-purple-400"></i>
+            <h2 class="text-sm font-semibold text-slate-200">Lời bài hát gốc (Input)</h2>
+          </div>
+          <button onclick="clearInput()" class="text-xs text-slate-400 hover:text-rose-400 transition">
+            <i class="fa-solid fa-trash-can"></i> Xóa
+          </button>
         </div>
 
-        <div class="options">
-            <label><input type="checkbox" id="optZws" checked> Phá cụm từ (Zero-Width Space)</label>
-            <label><input type="checkbox" id="optHomoglyph" checked> Thế ký tự đồng dạng Cyrillic (~25%)</label>
-            <label><input type="checkbox" id="optAdlib" checked> Chèn Ad-lib ngẫu nhiên (~30%)</label>
+        <div class="relative flex-1 min-h-[320px]">
+          <textarea id="rawInput" oninput="processLyrics()" placeholder="Nhập hoặc dán lời bài hát vào đây..." class="w-full h-full p-4 bg-transparent text-slate-100 placeholder-slate-500 focus:outline-none resize-none font-sans text-sm leading-relaxed"></textarea>
+        </div>
+      </div>
+
+      <!-- Flow Analysis Breakdown -->
+      <div class="bg-studio-800 rounded-xl border border-studio-700 p-4 shadow-xl">
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="text-xs font-semibold text-slate-300 uppercase tracking-wider flex items-center gap-2">
+            <i class="fa-solid fa-chart-simple text-emerald-400"></i> Phân tích Âm tiết & Nhịp điệu (Syllable Flow)
+          </h3>
+          <div class="flex items-center gap-3 text-[11px]">
+            <span class="flex items-center gap-1 text-slate-400"><span class="w-2 h-2 rounded-full bg-studio-warning"></span> &lt;6 (Ngắn)</span>
+            <span class="flex items-center gap-1 text-slate-400"><span class="w-2 h-2 rounded-full bg-studio-success"></span> 6-10 (Chuẩn)</span>
+            <span class="flex items-center gap-1 text-slate-400"><span class="w-2 h-2 rounded-full bg-studio-danger"></span> &gt;10 (Dài)</span>
+          </div>
         </div>
 
-        <button onclick="processLyrics()">Xử lý lách bản quyền</button>
-
-        <div class="group">
-            <label class="title">Lời bài hát đã tối ưu (Dán vào Suno):</label>
-            <textarea id="outputText" readonly placeholder="Kết quả sẽ xuất hiện ở đây..."></textarea>
+        <div id="flowList" class="max-h-[220px] overflow-y-auto pr-2 space-y-1.5 font-mono text-xs">
+          <p class="text-slate-500 italic text-center py-6">Nhập lời bài hát để xem phân tích nhịp từng câu...</p>
         </div>
-
-        <button class="btn-copy" onclick="copyResult()">Sao chép kết quả</button>
+      </div>
     </div>
 
-    <script>
-        function bypassSunoCopyright(lyrics, config) {
-            const adlibs = [' (yeah)', ' (oh)', ' ~', ' (hmm)', ' (ooh)'];
-            const homoglyphs = {
-                'a': 'а', 'e': 'е', 'o': 'о',
-                'i': 'і', 'c': 'с', 'p': 'р'
-            };
+    <!-- Right Panel: Controls & Processed Output -->
+    <div class="lg:col-span-6 flex flex-col gap-4">
 
-            return lyrics.split('\n').map(line => {
-                let trimmed = line.trim();
-                
-                // Giữ nguyên các thẻ cấu trúc của Suno như [Verse], [Chorus]
-                if (!trimmed || /^\[.*\]$/i.test(trimmed)) {
-                    return line;
-                }
+      <!-- Anti-Copyright Options -->
+      <div class="bg-studio-800 rounded-xl border border-studio-700 p-4 shadow-xl space-y-3">
+        <h3 class="text-xs font-semibold text-slate-300 uppercase tracking-wider flex items-center gap-2">
+          <i class="fa-solid fa-sliders text-purple-400"></i> Thuật toán Lách bản quyền (Anti-Copyright Engine)
+        </h3>
 
-                let processed = trimmed;
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+          <label class="flex items-center gap-2 p-2.5 rounded-lg bg-studio-900/60 border border-studio-700/60 cursor-pointer hover:border-purple-500/50 transition">
+            <input type="checkbox" id="optNGram" checked onchange="processLyrics()" class="rounded border-slate-700 bg-slate-800 text-purple-600 focus:ring-purple-500">
+            <span class="text-slate-200">Thay thế N-Gram & Đồng nghĩa</span>
+          </label>
 
-                // 1. Phá chuỗi N-Gram bằng Zero-Width Space (\u200B)
-                if (config.useZws) {
-                    processed = processed.split(' ').join('\u200B ');
-                }
+          <label class="flex items-center gap-2 p-2.5 rounded-lg bg-studio-900/60 border border-studio-700/60 cursor-pointer hover:border-purple-500/50 transition">
+            <input type="checkbox" id="optZeroWidth" checked onchange="processLyrics()" class="rounded border-slate-700 bg-slate-800 text-purple-600 focus:ring-purple-500">
+            <span class="text-slate-200">Chèn ký tự ẩn (<code class="text-purple-300 font-mono">\u200b</code>)</span>
+          </label>
 
-                // 2. Thay thế ngẫu nhiên nguyên âm/phụ âm bằng Unicode Homoglyphs
-                if (config.useHomoglyph) {
-                    processed = processed.replace(/[aeicp]/gi, (char) => {
-                        const lower = char.toLowerCase();
-                        if (Math.random() < 0.25 && homoglyphs[lower]) {
-                            const replacement = homoglyphs[lower];
-                            return char === char.toUpperCase() ? replacement.toUpperCase() : replacement;
-                        }
-                        return char;
-                    });
-                }
+          <label class="flex items-center gap-2 p-2.5 rounded-lg bg-studio-900/60 border border-studio-700/60 cursor-pointer hover:border-purple-500/50 transition">
+            <input type="checkbox" id="optSwapClauses" onchange="processLyrics()" class="rounded border-slate-700 bg-slate-800 text-purple-600 focus:ring-purple-500">
+            <span class="text-slate-200">Đảo vế câu qua dấu phẩy</span>
+          </label>
 
-                // 3. Chèn thêm Ad-lib làm lệch Vector Similarity
-                if (config.useAdlib && Math.random() < 0.30) {
-                    const randomAdlib = adlibs[Math.floor(Math.random() * adlibs.length)];
-                    processed += randomAdlib;
-                }
+          <label class="flex items-center gap-2 p-2.5 rounded-lg bg-studio-900/60 border border-studio-700/60 cursor-pointer hover:border-purple-500/50 transition">
+            <input type="checkbox" id="optPreserveRhymes" checked onchange="processLyrics()" class="rounded border-slate-700 bg-slate-800 text-purple-600 focus:ring-purple-500">
+            <span class="text-slate-200">Bảo toàn vần chân (Rhyme)</span>
+          </label>
+        </div>
+      </div>
 
-                return processed;
-            }).join('\n');
+      <!-- Live Dashboard Stats -->
+      <div class="grid grid-cols-3 gap-3">
+        <div class="bg-studio-800 border border-studio-700 p-3 rounded-xl text-center shadow-lg">
+          <span class="text-slate-400 text-[11px] block mb-0.5">Tổng số câu</span>
+          <span id="statLineCount" class="text-lg font-bold text-white font-mono">0</span>
+        </div>
+        <div class="bg-studio-800 border border-studio-700 p-3 rounded-xl text-center shadow-lg">
+          <span class="text-slate-400 text-[11px] block mb-0.5">Lượt biến đổi</span>
+          <span id="statReplacements" class="text-lg font-bold text-purple-400 font-mono">0</span>
+        </div>
+        <div class="bg-studio-800 border border-studio-700 p-3 rounded-xl text-center shadow-lg">
+          <span class="text-slate-400 text-[11px] block mb-0.5">Flow Score</span>
+          <span id="statFlowScore" class="text-lg font-bold text-emerald-400 font-mono">0%</span>
+        </div>
+      </div>
+
+      <!-- Processed Output Box -->
+      <div class="bg-studio-800 rounded-xl border border-studio-700 flex flex-col flex-1 overflow-hidden shadow-xl">
+        <div class="px-4 py-3 bg-studio-800/90 border-b border-studio-700 flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-bolt text-amber-400"></i>
+            <h2 class="text-sm font-semibold text-slate-200">Lời đã xử lý (Suno Ready)</h2>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="copyOutput()" class="px-2.5 py-1 bg-purple-600 hover:bg-purple-500 text-white rounded text-xs font-medium transition flex items-center gap-1.5 shadow">
+              <i class="fa-solid fa-copy"></i> Sao chép
+            </button>
+            <button onclick="downloadOutput()" class="px-2.5 py-1 bg-studio-700 hover:bg-slate-700 text-slate-200 rounded text-xs font-medium transition flex items-center gap-1.5 border border-slate-600/50">
+              <i class="fa-solid fa-download"></i> .TXT
+            </button>
+          </div>
+        </div>
+
+        <div class="relative flex-1 min-h-[300px]">
+          <textarea id="processedOutput" readonly placeholder="Kết quả lách bản quyền sẽ xuất hiện tại đây..." class="w-full h-full p-4 bg-transparent text-emerald-300 placeholder-slate-500 focus:outline-none resize-none font-mono text-sm leading-relaxed"></textarea>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Modal: Custom Dictionary Manager -->
+  <div id="dictModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-studio-800 border border-studio-700 rounded-2xl max-w-2xl w-full p-6 shadow-2xl flex flex-col max-h-[85vh]">
+      <div class="flex items-center justify-between border-b border-studio-700 pb-4 mb-4">
+        <h3 class="text-base font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-book-open text-purple-400"></i> Quản lý Từ điển Quy tắc N-Gram
+        </h3>
+        <button onclick="closeModal('dictModal')" class="text-slate-400 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <!-- Add New Rule Form -->
+      <form onsubmit="addDictRule(event)" class="grid grid-cols-1 sm:grid-cols-12 gap-2 mb-4 bg-studio-900/80 p-3 rounded-xl border border-studio-700">
+        <input type="text" id="newFrom" placeholder="Từ / Cụm gốc (vd: yêu thương)" required class="sm:col-span-5 px-3 py-2 bg-studio-800 border border-slate-700 rounded-lg text-xs text-white focus:outline-none focus:border-purple-500">
+        <input type="text" id="newTo" placeholder="Thay thế (cách bởi | vd: vương vấn|trân quý)" required class="sm:col-span-5 px-3 py-2 bg-studio-800 border border-slate-700 rounded-lg text-xs text-white focus:outline-none focus:border-purple-500">
+        <button type="submit" class="sm:col-span-2 px-3 py-2 bg-purple-600 hover:bg-purple-500 text-white font-medium text-xs rounded-lg transition">Thêm</button>
+      </form>
+
+      <!-- Dictionary List -->
+      <div id="dictRulesList" class="flex-1 overflow-y-auto space-y-2 pr-1 my-2">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <div class="border-t border-studio-700 pt-4 mt-4 flex justify-between items-center">
+        <button onclick="resetDefaultDict()" class="text-xs text-rose-400 hover:underline">
+          <i class="fa-solid fa-rotate-left"></i> Khôi phục mặc định
+        </button>
+        <button onclick="closeModal('dictModal')" class="px-4 py-2 bg-studio-700 hover:bg-slate-700 text-slate-200 text-xs rounded-lg transition">Đóng</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Application Logic -->
+  <script>
+    // Initial Default Dictionary
+    const defaultDictionary = [
+      { from: "yêu thương", to: "vấn vương|trân quý|yêu dấu" },
+      { from: "mặt trời", to: "thái dương|ánh dương|nắng hồng" },
+      { from: "đêm nay", to: "đêm dài|màn đêm|bóng tối" },
+      { from: "cô đơn", to: "hiu quạnh|lẻ loi|đơn côi" },
+      { from: "cơn mưa", to: "màn mưa|giọt mưa|mưa rơi" },
+      { from: "mãi mãi", to: "ngàn đời|hoài hoài|suốt kiếp" },
+      { from: "forever", to: "always|eternally|for all time" },
+      { from: "i love you", to: "i adore you|my heart belongs to you" },
+      { from: "broken heart", to: "shattered heart|wounded soul" },
+      { from: "in the night", to: "through the dark|under the stars" }
+    ];
+
+    let customDict = [];
+
+    // Initialize App
+    window.addEventListener('DOMContentLoaded', () => {
+      loadDictFromStorage();
+      renderDictModal();
+      processLyrics();
+    });
+
+    // LocalStorage Management
+    function loadDictFromStorage() {
+      const stored = localStorage.getItem('suno_custom_dict');
+      if (stored) {
+        try { customDict = JSON.parse(stored); } catch (e) { customDict = [...defaultDictionary]; }
+      } else {
+        customDict = [...defaultDictionary];
+        saveDictToStorage();
+      }
+    }
+
+    function saveDictToStorage() {
+      localStorage.setItem('suno_custom_dict', JSON.stringify(customDict));
+    }
+
+    function resetDefaultDict() {
+      if (confirm('Khôi phục danh sách từ điển về mặc định?')) {
+        customDict = [...defaultDictionary];
+        saveDictToStorage();
+        renderDictModal();
+        processLyrics();
+      }
+    }
+
+    // Modal Handlers
+    function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+    function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+
+    function renderDictModal() {
+      const container = document.getElementById('dictRulesList');
+      if (customDict.length === 0) {
+        container.innerHTML = `<p class="text-xs text-slate-500 text-center py-4">Chưa có quy tắc nào trong từ điển.</p>`;
+        return;
+      }
+      container.innerHTML = customDict.map((item, index) => `
+        <div class="flex items-center justify-between bg-studio-900/60 p-2.5 rounded-lg border border-studio-700/60 text-xs">
+          <div class="flex items-center gap-2 font-mono">
+            <span class="text-purple-300 font-semibold">${escapeHtml(item.from)}</span>
+            <i class="fa-solid fa-arrow-right text-slate-500 text-[10px]"></i>
+            <span class="text-emerald-400">${escapeHtml(item.to)}</span>
+          </div>
+          <button onclick="deleteDictRule(${index})" class="text-slate-500 hover:text-rose-400 p-1"><i class="fa-solid fa-trash-can"></i></button>
+        </div>
+      `).join('');
+    }
+
+    function addDictRule(e) {
+      e.preventDefault();
+      const fromVal = document.getElementById('newFrom').value.trim().toLowerCase();
+      const toVal = document.getElementById('newTo').value.trim();
+      if (!fromVal || !toVal) return;
+
+      customDict.unshift({ from: fromVal, to: toVal });
+      saveDictToStorage();
+      renderDictModal();
+      document.getElementById('newFrom').value = '';
+      document.getElementById('newTo').value = '';
+      processLyrics();
+    }
+
+    function deleteDictRule(index) {
+      customDict.splice(index, 1);
+      saveDictToStorage();
+      renderDictModal();
+      processLyrics();
+    }
+
+    // Insert Suno Structural Tags
+    function insertTag(tag) {
+      const textarea = document.getElementById('rawInput');
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      const text = textarea.value;
+      const insertion = (start > 0 && text[start - 1] !== '\n' ? '\n' : '') + tag + '\n';
+      textarea.value = text.substring(0, start) + insertion + text.substring(end);
+      textarea.focus();
+      textarea.selectionStart = textarea.selectionEnd = start + insertion.length;
+      processLyrics();
+    }
+
+    // Syllable Counter Logic
+    function countSyllables(line) {
+      const clean = line.replace(/\[.*?\]/g, '').trim();
+      if (!clean) return 0;
+      // Basic syllable estimation: split by whitespace
+      const words = clean.split(/\s+/).filter(w => w.length > 0);
+      return words.length;
+    }
+
+    // Zero-Width Space Injection Logic (\u200b)
+    function injectZeroWidthSpaces(text) {
+      return text.replace(/([a-zA-ZÀ-ỹ]{4,})/g, (match) => {
+        const mid = Math.floor(match.length / 2);
+        return match.slice(0, mid) + '\u200b' + match.slice(mid);
+      });
+    }
+
+    // Clause Swapping Logic (via commas)
+    function swapClauseLine(line) {
+      if (line.trim().startsWith('[') && line.trim().endsWith(']')) return line;
+      const parts = line.split(',');
+      if (parts.length === 2 && parts[0].trim() && parts[1].trim()) {
+        return parts[1].trim() + ', ' + parts[0].trim();
+      }
+      return line;
+    }
+
+    // Main Processing Engine
+    function processLyrics() {
+      const rawText = document.getElementById('rawInput').value;
+      const optNGram = document.getElementById('optNGram').checked;
+      const optZeroWidth = document.getElementById('optZeroWidth').checked;
+      const optSwapClauses = document.getElementById('optSwapClauses').checked;
+      const optPreserveRhymes = document.getElementById('optPreserveRhymes').checked;
+
+      const lines = rawText.split('\n');
+      let replacementCount = 0;
+      let totalLines = 0;
+      let optimalLinesCount = 0;
+
+      const flowList = document.getElementById('flowList');
+      flowList.innerHTML = '';
+
+      const processedLines = lines.map(line => {
+        const trimmed = line.trim();
+
+        // Check if structural tag
+        if (trimmed.startsWith('[') && trimmed.endsWith(']')) {
+          return line;
         }
 
-        function processLyrics() {
-            const input = document.getElementById('inputText').value;
-            const config = {
-                useZws: document.getElementById('optZws').checked,
-                useHomoglyph: document.getElementById('optHomoglyph').checked,
-                useAdlib: document.getElementById('optAdlib').checked
-            };
+        if (!trimmed) return line;
 
-            const result = bypassSunoCopyright(input, config);
-            document.getElementById('outputText').value = result;
+        totalLines++;
+        let currentLine = line;
+
+        // 1. Clause Swap Option
+        if (optSwapClauses) {
+          const swapped = swapClauseLine(currentLine);
+          if (swapped !== currentLine) {
+            currentLine = swapped;
+            replacementCount++;
+          }
         }
 
-        function copyResult() {
-            const output = document.getElementById('outputText');
-            if (!output.value) return;
-            
-            output.select();
-            navigator.clipboard.writeText(output.value);
-            alert('Đã sao chép lời bài hát đã xử lý vào bộ nhớ tạm!');
+        // 2. N-Gram & Synonym Replacement
+        if (optNGram) {
+          customDict.forEach(rule => {
+            const regex = new RegExp('\\b' + escapeRegExp(rule.from) + '\\b', 'gi');
+            if (regex.test(currentLine)) {
+              const options = rule.to.split('|').map(s => s.trim());
+              const replacement = options[Math.floor(Math.random() * options.length)];
+              
+              // If preserve rhymes is enabled, avoid changing the last word if it matches rule
+              if (optPreserveRhymes) {
+                const words = currentLine.trim().split(/\s+/);
+                const lastWord = words[words.length - 1].toLowerCase().replace(/[.,!?]/g, '');
+                if (rule.from.toLowerCase().includes(lastWord) && words.length > 2) {
+                  return; // skip replacing the last rhyming word
+                }
+              }
+
+              currentLine = currentLine.replace(regex, () => {
+                replacementCount++;
+                return replacement;
+              });
+            }
+          });
         }
-    </script>
+
+        // 3. Zero-Width Space Insertion
+        if (optZeroWidth) {
+          currentLine = injectZeroWidthSpaces(currentLine);
+        }
+
+        // Syllable Flow Analysis
+        const syllables = countSyllables(line);
+        let badgeBg = 'bg-studio-success/20 text-emerald-300 border-emerald-500/30';
+        let badgeText = 'Chuẩn';
+
+        if (syllables > 0 && syllables < 6) {
+          badgeBg = 'bg-studio-warning/20 text-amber-300 border-amber-500/30';
+          badgeText = 'Ngắn';
+        } else if (syllables > 10) {
+          badgeBg = 'bg-studio-danger/20 text-rose-300 border-rose-500/30';
+          badgeText = 'Dài';
+        } else if (syllables >= 6 && syllables <= 10) {
+          optimalLinesCount++;
+        }
+
+        if (trimmed) {
+          const flowItem = document.createElement('div');
+          flowItem.className = 'flex items-center justify-between p-2 bg-studio-900/50 rounded border border-studio-700/50';
+          flowItem.innerHTML = `
+            <span class="truncate pr-2 text-slate-300">${escapeHtml(trimmed)}</span>
+            <div class="flex items-center gap-2 shrink-0">
+              <span class="text-[10px] px-1.5 py-0.5 rounded border font-mono ${badgeBg}">${syllables} âm</span>
+            </div>
+          `;
+          flowList.appendChild(flowItem);
+        }
+
+        return currentLine;
+      });
+
+      if (totalLines === 0) {
+        flowList.innerHTML = `<p class="text-slate-500 italic text-center py-6">Nhập lời bài hát để xem phân tích nhịp từng câu...</p>`;
+      }
+
+      // Update Output Textarea
+      document.getElementById('processedOutput').value = processedLines.join('\n');
+
+      // Update Stats Dashboard
+      document.getElementById('statLineCount').innerText = totalLines;
+      document.getElementById('statReplacements').innerText = replacementCount;
+      const flowScore = totalLines > 0 ? Math.round((optimalLinesCount / totalLines) * 100) : 0;
+      document.getElementById('statFlowScore').innerText = `${flowScore}%`;
+    }
+
+    // Helper Utilities
+    function clearInput() {
+      document.getElementById('rawInput').value = '';
+      processLyrics();
+    }
+
+    function copyOutput() {
+      const output = document.getElementById('processedOutput');
+      if (!output.value) return;
+      navigator.clipboard.writeText(output.value);
+      alert('Đã sao chép lời đã xử lý vào bộ nhớ tạm!');
+    }
+
+    function downloadOutput() {
+      const content = document.getElementById('processedOutput').value;
+      if (!content) return;
+      const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'suno_lyrics_anticopyright.txt';
+      a.click();
+    }
+
+    function escapeRegExp(string) {
+      return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    // Sample Loader
+    function loadSample(lang) {
+      if (lang === 'vn') {
+        document.getElementById('rawInput').value = 
+`[Intro]
+[Verse]
+Đêm nay mặt trời đã khuất sau lưng đồi
+Cơn mưa rơi âm thầm như xé lòng tôi
+Yêu thương ngày xưa nay đã bay đi mất
+Nhìn lại bóng hình xưa chỉ thấy cô đơn
+
+[Chorus]
+Mãi mãi bên nhau chỉ là lời hứa suông
+Mặt trời không còn chiếu sáng con đường
+Cơn mưa xóa hết dấu vết tình đôi ta
+Nhớ thương chỉ còn lại sự xót xa
+
+[Outro]
+Tạm biệt tình yêu`;
+      } else {
+        document.getElementById('rawInput').value = 
+`[Intro]
+[Verse]
+I walk alone in the night under the stars
+Remembering the days of a broken heart
+I love you forever but you went away
+Leaving me here in the cold rainy day
+
+[Chorus]
+Forever and ever my heart will remember
+The fire we had in the cold of December
+I love you endlessly through space and time
+Forever you will be my sweetest rhyme
+
+[Outro]
+Goodbye my love`;
+      }
+      processLyrics();
+    }
+  </script>
 </body>
 </html>
