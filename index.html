@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suno Lyrics Anti-Copyright Studio & Flow Analyzer</title>
+    <title>Suno Lyrics Anti-Copyright Studio Pro</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
@@ -46,27 +46,30 @@
 <body class="font-sans min-h-screen flex flex-col">
 
     <!-- Top Navigation Header -->
-    <header class="glass-panel sticky top-0 z-50 px-6 py-3 border-b border-studio-border flex items-center justify-between">
+    <header class="glass-panel sticky top-0 z-40 px-6 py-3 border-b border-studio-border flex items-center justify-between">
         <div class="flex items-center space-x-3">
             <div class="w-9 h-9 rounded-lg bg-gradient-to-tr from-indigo-600 to-emerald-400 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30">
                 <i class="fa-solid fa-wand-magic-sparkles text-lg"></i>
             </div>
             <div>
                 <h1 class="text-base font-bold text-white tracking-tight flex items-center gap-2">
-                    SUNO LYRICS STUDIO <span class="text-xs font-mono bg-indigo-500/20 text-indigo-400 px-2 py-0.5 rounded border border-indigo-500/30">v3.0 Pro</span>
+                    SUNO LYRICS STUDIO <span class="text-xs font-mono bg-indigo-500/20 text-indigo-400 px-2 py-0.5 rounded border border-indigo-500/30">v3.5 Ultimate</span>
                 </h1>
-                <p class="text-xs text-gray-400">Tái cấu trúc chống bản quyền • Bảo toàn vần chân • Cân bằng âm tiết</p>
+                <p class="text-xs text-gray-400">Tái cấu trúc chống bản quyền • Bảo toàn vần • Phân tích âm tiết • Từ điển tùy chỉnh</p>
             </div>
         </div>
-        <div class="flex items-center space-x-3">
+        <div class="flex items-center space-x-2">
+            <button onclick="openConfigModal()" class="px-3 py-1.5 text-xs font-medium bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 border border-indigo-500/30 rounded-md transition flex items-center gap-1.5">
+                <i class="fa-solid fa-sliders"></i> Quản lý Từ điển & Quy tắc
+            </button>
             <button onclick="loadSample('en')" class="px-3 py-1.5 text-xs font-medium bg-studio-border/50 hover:bg-studio-border text-gray-300 rounded-md transition">
-                <i class="fa-solid fa-file-lines mr-1.5 text-indigo-400"></i> Mẫu EN
+                <i class="fa-solid fa-file-lines text-indigo-400 mr-1"></i> Mẫu EN
             </button>
             <button onclick="loadSample('vi')" class="px-3 py-1.5 text-xs font-medium bg-studio-border/50 hover:bg-studio-border text-gray-300 rounded-md transition">
-                <i class="fa-solid fa-file-lines mr-1.5 text-emerald-400"></i> Mẫu VN
+                <i class="fa-solid fa-file-lines text-emerald-400 mr-1"></i> Mẫu VN
             </button>
             <button onclick="clearAll()" class="px-3 py-1.5 text-xs font-medium bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/20 rounded-md transition">
-                <i class="fa-solid fa-trash-can mr-1.5"></i> Xóa
+                <i class="fa-solid fa-trash-can mr-1"></i> Xóa
             </button>
         </div>
     </header>
@@ -80,25 +83,17 @@
             <!-- Quick Tag Bar -->
             <div class="glass-panel p-3 rounded-xl flex items-center gap-2 overflow-x-auto">
                 <span class="text-xs font-semibold text-gray-400 whitespace-nowrap mr-1"><i class="fa-solid fa-tags text-indigo-400 mr-1"></i> Thẻ Suno:</span>
-                <button onclick="insertTag('[Verse]')" class="text-xs bg-studio-border hover:bg-indigo-600/30 hover:border-indigo-500/50 border border-transparent text-gray-300 px-2.5 py-1 rounded transition">
-                    [Verse]
-                </button>
-                <button onclick="insertTag('[Pre-Chorus]')" class="text-xs bg-studio-border hover:bg-indigo-600/30 hover:border-indigo-500/50 border border-transparent text-gray-300 px-2.5 py-1 rounded transition">
-                    [Pre-Chorus]
-                </button>
-                <button onclick="insertTag('[Chorus]')" class="text-xs bg-studio-border hover:bg-indigo-600/30 hover:border-indigo-500/50 border border-transparent text-gray-300 px-2.5 py-1 rounded transition">
-                    [Chorus]
-                </button>
-                <button onclick="insertTag('[Bridge]')" class="text-xs bg-studio-border hover:bg-indigo-600/30 hover:border-indigo-500/50 border border-transparent text-gray-300 px-2.5 py-1 rounded transition">
-                    [Bridge]
-                </button>
-                <button onclick="insertTag('[Outro: Fade Out]')" class="text-xs bg-studio-border hover:bg-indigo-600/30 hover:border-indigo-500/50 border border-transparent text-gray-300 px-2.5 py-1 rounded transition">
-                    [Outro]
-                </button>
+                <button onclick="insertTag('[Intro: Acoustic Guitar]')" class="text-xs bg-studio-border hover:bg-indigo-600/30 border border-transparent text-gray-300 px-2 py-1 rounded transition whitespace-nowrap">[Intro]</button>
+                <button onclick="insertTag('[Verse]')" class="text-xs bg-studio-border hover:bg-indigo-600/30 border border-transparent text-gray-300 px-2 py-1 rounded transition whitespace-nowrap">[Verse]</button>
+                <button onclick="insertTag('[Pre-Chorus]')" class="text-xs bg-studio-border hover:bg-indigo-600/30 border border-transparent text-gray-300 px-2 py-1 rounded transition whitespace-nowrap">[Pre-Chorus]</button>
+                <button onclick="insertTag('[Chorus]')" class="text-xs bg-studio-border hover:bg-indigo-600/30 border border-transparent text-gray-300 px-2 py-1 rounded transition whitespace-nowrap">[Chorus]</button>
+                <button onclick="insertTag('[Bridge]')" class="text-xs bg-studio-border hover:bg-indigo-600/30 border border-transparent text-gray-300 px-2 py-1 rounded transition whitespace-nowrap">[Bridge]</button>
+                <button onclick="insertTag('[Beat Drop]')" class="text-xs bg-studio-border hover:bg-indigo-600/30 border border-transparent text-gray-300 px-2 py-1 rounded transition whitespace-nowrap">[Drop]</button>
+                <button onclick="insertTag('[Outro: Fade Out]')" class="text-xs bg-studio-border hover:bg-indigo-600/30 border border-transparent text-gray-300 px-2 py-1 rounded transition whitespace-nowrap">[Outro]</button>
             </div>
 
             <!-- Original Lyrics Input -->
-            <div class="glass-panel rounded-xl flex-1 flex flex-col overflow-hidden relative">
+            <div class="glass-panel rounded-xl flex-1 flex flex-col overflow-hidden relative min-h-[450px]">
                 <div class="px-4 py-3 border-b border-studio-border flex justify-between items-center bg-studio-panel/50">
                     <span class="text-xs font-bold text-gray-300 tracking-wider uppercase flex items-center gap-2">
                         <i class="fa-solid fa-pen-to-square text-indigo-400"></i> Lời bài hát gốc
@@ -113,18 +108,22 @@
         <div class="lg:col-span-6 flex flex-col gap-4">
 
             <!-- Control Toggles -->
-            <div class="glass-panel p-3 rounded-xl flex items-center justify-between text-xs flex-wrap gap-2">
+            <div class="glass-panel p-3 rounded-xl flex items-center justify-between text-xs flex-wrap gap-3">
                 <label class="flex items-center gap-2 cursor-pointer">
                     <input type="checkbox" id="toggleNgram" checked onchange="processLyrics()" class="rounded bg-studio-border border-gray-600 text-indigo-600 focus:ring-0">
-                    <span class="text-gray-300">Phá cụm bản quyền (N-Gram)</span>
+                    <span class="text-gray-300">Phá cụm N-Gram</span>
                 </label>
                 <label class="flex items-center gap-2 cursor-pointer">
                     <input type="checkbox" id="toggleRhyme" checked onchange="processLyrics()" class="rounded bg-studio-border border-gray-600 text-indigo-600 focus:ring-0">
-                    <span class="text-emerald-400 font-medium"><i class="fa-solid fa-music mr-1"></i>Bảo toàn vần chân (End-Rhyme)</span>
+                    <span class="text-emerald-400 font-medium"><i class="fa-solid fa-music mr-1"></i>Bảo toàn vần chân</span>
+                </label>
+                <label class="flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" id="toggleInvert" onchange="processLyrics()" class="rounded bg-studio-border border-gray-600 text-indigo-600 focus:ring-0">
+                    <span class="text-gray-300">Đảo vế câu (dấu phẩy)</span>
                 </label>
                 <label class="flex items-center gap-2 cursor-pointer">
                     <input type="checkbox" id="toggleZeroWidth" checked onchange="processLyrics()" class="rounded bg-studio-border border-gray-600 text-indigo-600 focus:ring-0">
-                    <span class="text-gray-300">Chèn Ký tự ẩn Unicode (\u200b)</span>
+                    <span class="text-gray-300">Ký tự ẩn (\u200b)</span>
                 </label>
             </div>
 
@@ -149,10 +148,10 @@
             </div>
 
             <!-- Result Output with Syllable Badges & Heatmap -->
-            <div class="glass-panel rounded-xl flex-1 flex flex-col overflow-hidden relative">
+            <div class="glass-panel rounded-xl flex-1 flex flex-col overflow-hidden relative min-h-[450px]">
                 <div class="px-4 py-3 border-b border-studio-border flex justify-between items-center bg-studio-panel/50">
                     <span class="text-xs font-bold text-emerald-400 tracking-wider uppercase flex items-center gap-2">
-                        <i class="fa-solid fa-check-double"></i> Kết quả đã xử lý & Phân tích âm tiết
+                        <i class="fa-solid fa-check-double"></i> Kết quả xử lý & Phân tích âm tiết
                     </span>
                     <div class="flex items-center space-x-2">
                         <button onclick="copyOutput()" class="px-3 py-1 bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-xs rounded transition flex items-center gap-1.5 shadow-lg shadow-indigo-600/30">
@@ -176,5 +175,403 @@
         </div>
     </main>
 
+    <!-- CONFIG MODAL (TỪ ĐIỂN VÀ QUY TẮC) -->
+    <div id="configModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="glass-panel bg-studio-panel rounded-2xl max-w-2xl w-full max-h-[85vh] flex flex-col shadow-2xl border border-studio-border overflow-hidden">
+            <div class="p-4 border-b border-studio-border flex justify-between items-center">
+                <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-sliders text-indigo-400"></i> Quản lý Từ điển & Quy tắc N-Gram
+                </h3>
+                <button onclick="closeConfigModal()" class="text-gray-400 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="p-4 overflow-y-auto space-y-6 flex-1 text-xs">
+                
+                <!-- N-Gram Rule Section -->
+                <div>
+                    <h4 class="font-bold text-indigo-400 mb-2 uppercase tracking-wider">Cụm từ N-Gram bị chặn</h4>
+                    <div class="flex gap-2 mb-3">
+                        <input type="text" id="newNgramPattern" placeholder="Cụm gốc (ví dụ: i love you)" class="flex-1 bg-studio-base border border-studio-border rounded px-3 py-1.5 text-gray-200 focus:outline-none focus:border-indigo-500">
+                        <input type="text" id="newNgramReplace" placeholder="Thay bằng (ví dụ: i cherish you)" class="flex-1 bg-studio-base border border-studio-border rounded px-3 py-1.5 text-gray-200 focus:outline-none focus:border-indigo-500">
+                        <button onclick="addNgramRule()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-3 py-1.5 rounded font-medium">Thêm</button>
+                    </div>
+                    <div id="ngramList" class="space-y-1.5 max-h-36 overflow-y-auto"></div>
+                </div>
+
+                <!-- Synonym Rule Section -->
+                <div>
+                    <h4 class="font-bold text-emerald-400 mb-2 uppercase tracking-wider">Từ điển Từ đồng nghĩa & Nhóm vần</h4>
+                    <div class="flex gap-2 mb-3">
+                        <input type="text" id="newSynWord" placeholder="Từ gốc (ví dụ: love)" class="w-1/3 bg-studio-base border border-studio-border rounded px-3 py-1.5 text-gray-200 focus:outline-none focus:border-indigo-500">
+                        <input type="text" id="newSynOptions" placeholder="Các từ thay thế (cách bởi dấu phẩy)" class="flex-1 bg-studio-base border border-studio-border rounded px-3 py-1.5 text-gray-200 focus:outline-none focus:border-indigo-500">
+                        <button onclick="addSynonymRule()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-1.5 rounded font-medium">Thêm</button>
+                    </div>
+                    <div id="synonymList" class="space-y-1.5 max-h-36 overflow-y-auto"></div>
+                </div>
+
+            </div>
+            <div class="p-3 border-t border-studio-border bg-studio-base/50 flex justify-between items-center">
+                <button onclick="resetDefaults()" class="text-rose-400 hover:text-rose-300 font-medium">Khôi phục mặc định</button>
+                <button onclick="closeConfigModal()" class="bg-indigo-600 hover:bg-indigo-500 text-white px-4 py-1.5 rounded font-medium">Đóng & Áp dụng</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Toast Notification -->
-    <div id="toast" class="fixed bottom-6
+    <div id="toast" class="fixed bottom-6 right-6 bg-emerald-500 text-white px-4 py-2.5 rounded-lg shadow-xl font-medium text-xs flex items-center gap-2 transform translate-y-20 opacity-0 transition-all duration-300 z-50">
+        <i class="fa-solid fa-circle-check text-base"></i> <span id="toastMsg">Đã sao chép!</span>
+    </div>
+
+    <!-- JavaScript Engine -->
+    <script>
+        // Mặc định Quy tắc N-Gram
+        const DEFAULT_NGRAMS = [
+            { pattern: "i love you", replace: "I cherish your soul" },
+            { pattern: "in the night", replace: "as darkness descends" },
+            { pattern: "until the end of time", replace: "through all coming years" },
+            { pattern: "tears in my eyes", replace: "grief in my heart" },
+            { pattern: "anh yêu em", replace: "trao trọn con tim" },
+            { pattern: "trong đêm tối", replace: "dưới màn sương khuya" }
+        ];
+
+        // Mặc định Từ điển Đồng nghĩa & Nhóm vần
+        const DEFAULT_SYNONYMS = {
+            "love": { group: "OVE", options: ["adore", "cherish", "hold", "praise"] },
+            "heart": { group: "EART", options: ["soul", "mind", "core", "life"] },
+            "night": { group: "ITE", options: ["dusk", "shade", "darkness", "gloom"] },
+            "dream": { group: "EAM", options: ["vision", "wish", "hope"] },
+            "tears": { group: "EAR", options: ["grief", "drops", "rain"] },
+            "forever": { group: "EVER", options: ["evermore", "endlessly", "for all time"] },
+            "yêu": { group: "IEU", options: ["thương", "vấn vương", "mê", "si"] },
+            "đêm": { group: "EM", options: ["tối", "khuya", "màn đêm", "chiều tàn"] },
+            "mắt": { group: "AT", options: ["ánh mắt", "làn mi", "đôi mi"] },
+            "mơ": { group: "O", options: ["mộng", "ước", "vọng"] },
+            "khóc": { group: "OC", options: ["sầu", "tuôn rơi", "tiếc"] },
+            "mưa": { group: "UA", options: ["màn mưa", "giọt mưa", "cơn mưa"] }
+        };
+
+        const RHYME_GROUPS = {
+            "ITE": ["night", "light", "bright", "sight", "white"],
+            "EART": ["heart", "art", "part", "start"],
+            "OVE": ["love", "dove", "above"],
+            "EAM": ["dream", "stream", "gleam"],
+            "EAR": ["tear", "fear", "clear", "near"],
+            "EVER": ["forever", "ever", "never"],
+            "IEU": ["yêu", "chiều", "phiêu", "xiêu"],
+            "EM": ["đêm", "êm", "mềm", "thêm"],
+            "AT": ["mắt", "mặt", "thắt"],
+            "O": ["mơ", "thơ", "chờ", "ngơ"],
+            "OC": ["khóc", "ngọc", "góc"],
+            "UA": ["mưa", "xưa", "vừa"]
+        };
+
+        let activeNgrams = JSON.parse(localStorage.getItem('suno_ngrams')) || DEFAULT_NGRAMS;
+        let activeSynonyms = JSON.parse(localStorage.getItem('suno_synonyms')) || DEFAULT_SYNONYMS;
+
+        // Lưu LocalStorage
+        function saveData() {
+            localStorage.setItem('suno_ngrams', JSON.stringify(activeNgrams));
+            localStorage.setItem('suno_synonyms', JSON.stringify(activeSynonyms));
+            localStorage.setItem('suno_raw_input', document.getElementById('rawInput').value);
+        }
+
+        // Đếm âm tiết cho Heatmap
+        function countSyllables(text) {
+            text = text.trim();
+            if (!text) return 0;
+            const words = text.split(/\s+/);
+            const isVietnamese = /[àáảãạâầấẩẫậăằắẳẵặèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵđ]/i.test(text);
+            if (isVietnamese) return words.length;
+
+            let total = 0;
+            words.forEach(w => {
+                let word = w.toLowerCase().replace(/[^a-z]/g, '');
+                if (!word) return;
+                if (word.length <= 3) { total += 1; return; }
+                word = word.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, '').replace(/^y/, '');
+                const matches = word.match(/[aeiouy]{1,2}/g);
+                total += matches ? matches.length : 1;
+            });
+            return total;
+        }
+
+        function getSyllablesBadge(count) {
+            if (count === 0) return '';
+            if (count >= 6 && count <= 10) {
+                return `<span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">${count} âm tiết • Nhịp chuẩn</span>`;
+            } else if (count < 6) {
+                return `<span class="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30">${count} âm tiết • Ngắn</span>`;
+            } else {
+                return `<span class="text-[10px] font-mono px-2 py-0.5 rounded bg-rose-500/20 text-rose-400 border border-rose-500/30">${count} âm tiết • Dễ vấp nhịp</span>`;
+            }
+        }
+
+        function findSynonym(word, isLineEnd, enableRhyme) {
+            const clean = word.toLowerCase().replace(/[^\wàáảãạâầấẩẫậăằắẳẵặèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵđ]/g, '');
+            if (!activeSynonyms[clean]) return null;
+
+            const entry = activeSynonyms[clean];
+            const options = entry.options;
+
+            if (isLineEnd && enableRhyme && entry.group && RHYME_GROUPS[entry.group]) {
+                const rhyming = options.filter(opt => RHYME_GROUPS[entry.group].some(gw => gw.includes(opt) || opt.includes(gw)));
+                if (rhyming.length > 0) return rhyming[Math.floor(Math.random() * rhyming.length)];
+            }
+            return options[Math.floor(Math.random() * options.length)];
+        }
+
+        let processedRawText = "";
+
+        function processLyrics() {
+            const input = document.getElementById('rawInput').value;
+            const toggleNgram = document.getElementById('toggleNgram').checked;
+            const toggleRhyme = document.getElementById('toggleRhyme').checked;
+            const toggleInvert = document.getElementById('toggleInvert').checked;
+            const toggleZeroWidth = document.getElementById('toggleZeroWidth').checked;
+
+            document.getElementById('inputCharCount').innerText = `${input.length} ký tự`;
+            saveData();
+
+            if (!input.trim()) {
+                document.getElementById('outputContainer').innerHTML = `
+                    <div class="text-gray-500 text-center py-12 font-sans">
+                        <i class="fa-solid fa-wand-magic-sparkles text-3xl mb-3 text-studio-border"></i>
+                        <p>Nhập lời bài hát ở cột bên trái để bắt đầu phân tích và lách bản quyền...</p>
+                    </div>`;
+                updateStats(0, 0, '100%', '0%');
+                return;
+            }
+
+            const lines = input.split('\n');
+            let outputHtml = '';
+            let rawTextLines = [];
+            let totalReplacements = 0;
+            let optimalFlowLines = 0;
+            let validLyricLines = 0;
+
+            lines.forEach((line) => {
+                const trimmed = line.trim();
+
+                if (trimmed.startsWith('[') && trimmed.endsWith(']')) {
+                    outputHtml += `<div class="py-1 px-2 my-1 bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 font-bold rounded text-xs">${trimmed}</div>`;
+                    rawTextLines.push(line);
+                    return;
+                }
+
+                if (!trimmed) {
+                    outputHtml += `<div class="h-4"></div>`;
+                    rawTextLines.push('');
+                    return;
+                }
+
+                validLyricLines++;
+                let currentLine = line;
+
+                // 1. Phá cụm N-Gram
+                if (toggleNgram) {
+                    activeNgrams.forEach(rule => {
+                        const regex = new RegExp(`\\b${rule.pattern}\\b`, 'gi');
+                        if (regex.test(currentLine)) {
+                            currentLine = currentLine.replace(regex, rule.replace);
+                            totalReplacements++;
+                        }
+                    });
+                }
+
+                // 2. Đảo vế câu
+                if (toggleInvert && currentLine.includes(',')) {
+                    const parts = currentLine.split(',');
+                    if (parts.length === 2 && parts[0].trim().length > 3 && parts[1].trim().length > 3) {
+                        currentLine = `${parts[1].trim()}, ${parts[0].trim()}`;
+                    }
+                }
+
+                // 3. Thay từ đồng nghĩa & Vần chân
+                const words = currentLine.split(' ');
+                const newWords = words.map((w, idx) => {
+                    const isLastWord = (idx === words.length - 1);
+                    const replacement = findSynonym(w, isLastWord, toggleRhyme);
+
+                    if (replacement) {
+                        totalReplacements++;
+                        let finalWord = w[0] === w[0].toUpperCase() ? replacement.charAt(0).toUpperCase() + replacement.slice(1) : replacement;
+                        return `<span class="text-emerald-400 font-semibold border-b border-emerald-500/40">${finalWord}</span>`;
+                    }
+
+                    if (toggleZeroWidth && w.length > 3 && !w.startsWith('<')) {
+                        return w[0] + '\u200b' + w.slice(1);
+                    }
+                    return w;
+                });
+
+                const processedTextLine = newWords.map(w => w.replace(/<[^>]*>/g, '')).join(' ');
+                rawTextLines.push(processedTextLine);
+
+                const sylCount = countSyllables(processedTextLine);
+                if (sylCount >= 6 && sylCount <= 10) optimalFlowLines++;
+
+                outputHtml += `
+                    <div class="flex items-center justify-between py-1.5 px-3 rounded hover:bg-studio-panel/80 transition border border-transparent hover:border-studio-border">
+                        <div class="text-gray-200 font-mono">${newWords.join(' ')}</div>
+                        <div class="ml-3 shrink-0">${getSyllablesBadge(sylCount)}</div>
+                    </div>`;
+            });
+
+            processedRawText = rawTextLines.join('\n');
+            document.getElementById('outputContainer').innerHTML = outputHtml;
+
+            const flowScore = validLyricLines > 0 ? Math.round((optimalFlowLines / validLyricLines) * 100) : 0;
+            updateStats(lines.length, totalReplacements, toggleRhyme ? '100%' : 'Bật lại', `${flowScore}%`);
+        }
+
+        function updateStats(lines, replacements, rhymeMatch, flowScore) {
+            document.getElementById('statLines').innerText = lines;
+            document.getElementById('statReplacements').innerText = replacements;
+            document.getElementById('statRhymeMatch').innerText = rhymeMatch;
+            document.getElementById('statFlowScore').innerText = flowScore;
+        }
+
+        // --- MODAL DỮ LIỆU ---
+        function openConfigModal() {
+            renderModalData();
+            document.getElementById('configModal').classList.remove('hidden');
+        }
+
+        function closeConfigModal() {
+            document.getElementById('configModal').classList.add('hidden');
+            processLyrics();
+        }
+
+        function renderModalData() {
+            const ngramHtml = activeNgrams.map((item, idx) => `
+                <div class="flex items-center justify-between bg-studio-base p-2 rounded border border-studio-border">
+                    <span class="text-gray-300 font-mono"><strong class="text-rose-400">${item.pattern}</strong> ➔ <span class="text-emerald-400">${item.replace}</span></span>
+                    <button onclick="deleteNgram(${idx})" class="text-rose-400 hover:text-rose-300 px-2"><i class="fa-solid fa-trash"></i></button>
+                </div>`).join('');
+            document.getElementById('ngramList').innerHTML = ngramHtml || '<div class="text-gray-500">Chưa có quy tắc nào</div>';
+
+            const synHtml = Object.keys(activeSynonyms).map(key => `
+                <div class="flex items-center justify-between bg-studio-base p-2 rounded border border-studio-border">
+                    <span class="text-gray-300 font-mono"><strong class="text-indigo-400">${key}</strong>: ${activeSynonyms[key].options.join(', ')}</span>
+                    <button onclick="deleteSynonym('${key}')" class="text-rose-400 hover:text-rose-300 px-2"><i class="fa-solid fa-trash"></i></button>
+                </div>`).join('');
+            document.getElementById('synonymList').innerHTML = synHtml || '<div class="text-gray-500">Chưa có từ đồng nghĩa nào</div>';
+        }
+
+        function addNgramRule() {
+            const p = document.getElementById('newNgramPattern').value.trim();
+            const r = document.getElementById('newNgramReplace').value.trim();
+            if (p && r) {
+                activeNgrams.push({ pattern: p, replace: r });
+                document.getElementById('newNgramPattern').value = '';
+                document.getElementById('newNgramReplace').value = '';
+                renderModalData();
+                saveData();
+            }
+        }
+
+        function deleteNgram(idx) {
+            activeNgrams.splice(idx, 1);
+            renderModalData();
+            saveData();
+        }
+
+        function addSynonymRule() {
+            const w = document.getElementById('newSynWord').value.trim().toLowerCase();
+            const opts = document.getElementById('newSynOptions').value.split(',').map(x => x.trim()).filter(Boolean);
+            if (w && opts.length) {
+                activeSynonyms[w] = { group: "", options: opts };
+                document.getElementById('newSynWord').value = '';
+                document.getElementById('newSynOptions').value = '';
+                renderModalData();
+                saveData();
+            }
+        }
+
+        function deleteSynonym(key) {
+            delete activeSynonyms[key];
+            renderModalData();
+            saveData();
+        }
+
+        function resetDefaults() {
+            activeNgrams = [...DEFAULT_NGRAMS];
+            activeSynonyms = { ...DEFAULT_SYNONYMS };
+            renderModalData();
+            saveData();
+        }
+
+        // --- UTILS ---
+        function insertTag(tag) {
+            const textarea = document.getElementById('rawInput');
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            textarea.value = textarea.value.substring(0, start) + tag + '\n' + textarea.value.substring(end);
+            textarea.focus();
+            processLyrics();
+        }
+
+        function loadSample(lang) {
+            if (lang === 'en') {
+                document.getElementById('rawInput').value = 
+`[Verse 1]
+Underneath the midnight sky I will love you forever
+Every single night I see your tears in my eyes
+My heart is breaking in the dark stream of dream
+
+[Chorus]
+I love you until the end of time
+In the night when darkness falls
+You are my baby forever`;
+            } else {
+                document.getElementById('rawInput').value = 
+`[Verse 1]
+Anh yêu em trong đêm tối lặng câm
+Giọt nước mắt tuôn rơi trên đôi mi gầy
+Màn mưa lạnh rơi qua từng góc phố nhỏ
+
+[Chorus]
+Vấn vương hình bóng cũ trong giấc mơ
+Yêu em trọn đời dù tình dở dang
+Chiều tàn phai dấu chân người thương`;
+            }
+            processLyrics();
+        }
+
+        function clearAll() {
+            document.getElementById('rawInput').value = '';
+            processLyrics();
+        }
+
+        function copyOutput() {
+            if (!processedRawText) return;
+            navigator.clipboard.writeText(processedRawText).then(() => showToast("Đã sao chép vào bộ nhớ tạm!"));
+        }
+
+        function downloadText() {
+            if (!processedRawText) return;
+            const blob = new Blob([processedRawText], { type: 'text/plain;charset=utf-8' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'suno_lyrics_processed.txt';
+            a.click();
+            showToast("Đã tải tập tin suno_lyrics_processed.txt!");
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => toast.classList.add('translate-y-20', 'opacity-0'), 3000);
+        }
+
+        // Khôi phục văn bản cũ từ LocalStorage khi mở trang
+        window.onload = function() {
+            const savedInput = localStorage.getItem('suno_raw_input');
+            if (savedInput) {
+                document.getElementById('rawInput').value = savedInput;
+            }
+            processLyrics();
+        };
+    </script>
+</body>
+</html>
